@@ -34,8 +34,8 @@ const Header: React.FC = () => {
           }}>
             <img src='./assets/images/full.svg' alt='icon-x' />
           </div>
-          <div className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
-            <img src='./assets/images/quit.svg' alt='icon-x' />
+          <div id="quit-btn" className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
+            <img src='./images/quit.svg' alt='icon-x' />
           </div>
         </div>
       </div>

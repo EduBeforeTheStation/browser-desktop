@@ -11,9 +11,14 @@ export const configPath = path.resolve(userDataPath, "config.json");
 export const databasePath = path.resolve(userDataPath, "database.stormdb");
 export const defaultSearchEngine = "https://duckduckgo.com/";
 
-export interface History {
+export interface VisitHistory {
     url: string,
     title: string
+}
+
+export interface SearchHistory {
+    text: string,
+    link: string
 }
 
 export class Database {
@@ -36,10 +41,10 @@ export class Database {
         }
     }
 
-    public GetHistories(): Array<History> {
-        return this._db.get("history").value() as Array<History>;
+    public GetVisitHistories(): Array<VisitHistory> {
+        return this._db.get("history").value() as Array<VisitHistory>;
     }
-    public AddHistory(history: History): boolean {
+    public AddVisitHistory(history: VisitHistory): boolean {
         try {
             this._db.get("history").push(history);
             return true;
@@ -47,10 +52,10 @@ export class Database {
             return false;
         }
     }
-    public GetHistory(id: number): History {
-        return this._db.get("history").get(id).value() as History;
+    public GetVisitHistory(id: number): VisitHistory {
+        return this._db.get("history").get(id).value() as VisitHistory;
     }
-    public SetHistory(history: History, id: number): boolean {
+    public SetVisitHistory(history: VisitHistory, id: number): boolean {
         try {
             this._db.get("history").set(id, history);
             return true;

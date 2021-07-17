@@ -1,15 +1,19 @@
 import React, { useRef } from 'react';
 import Tab from '../Tab';
 import './style.css';
+import { ipcRenderer } from 'electron';
 
 const Header: React.FC = () => {
   const url = 'https://duckduckgo.com';
   const tablineRef = useRef(null);
   const tabMenuButtonClickHandler = () => {
     alert('quit');
+    //ipcRenderer.send('quit');
   };
+
+
   return (
-    <header>
+    <header className="header">
       <div className="tab_line" ref={tablineRef}>
         <div className="tabs_wrapper">
           <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} title={'김병주'} isClicked={true} />
@@ -25,8 +29,8 @@ const Header: React.FC = () => {
           }}>
             <img src='./images/full.svg' alt='icon-x' />
           </div>
-          <div className="tab_menu_button" onClick={tabMenuButtonClickHandler}>
-            <img src='./images/off.svg' alt='icon-x' onClick={tabMenuButtonClickHandler} />
+          <div className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
+            <img src='./images/quit.svg' alt='icon-x' />
           </div>
         </div>
       </div>

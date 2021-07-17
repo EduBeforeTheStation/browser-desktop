@@ -3,29 +3,23 @@ import Tab from '../Tab';
 import { Context } from '../../store';
 import './style.css';
 
+
 const Header: React.FC = () => {
   const tablineRef = useRef(null);
   const tabMenuButtonClickHandler = () => {
     //alert('quit');
   };
-  const { tabs }: any = useContext(Context);
 
-  const trigger = () => {
-    console.log('trick');
-  };
-
-  useEffect(() => {
-    console.log('catch');
-  }, [tabs]);
+  const { tabs, addTab }: any = useContext(Context);
 
   return (
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
-        <div className="tabs_wrapper">{tabs.map(({ url, title }: { url: string, title: string }, i: number) => (
-          <Tab idx={i} isClicked={true} />
-        ))}</div>
+        <div className="tabs_wrapper">
+          {tabs.map(({ url }: { url: string }, i: number) => <Tab idx={i} isClicked={true} />)}
+        </div>
         <div className="tab_menu_buttons_wrapper">
-          <div className="tab_menu_button" onClick={tabMenuButtonClickHandler}>
+          <div className="tab_menu_button" onClick={() => addTab()}>
             <img src='./assets/images/minimize.svg' alt='icon-x' />
           </div>
           <div id="full-btn" className="tab_menu_button" onClick={() => {
@@ -35,7 +29,7 @@ const Header: React.FC = () => {
             <img src='./assets/images/full.svg' alt='icon-x' />
           </div>
           <div id="quit-btn" className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
-            <img src='./images/quit.svg' alt='icon-x' />
+            <img src='./assets/images/quit.svg' alt='icon-x' />
           </div>
         </div>
       </div>

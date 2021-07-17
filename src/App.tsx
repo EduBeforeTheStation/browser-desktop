@@ -5,13 +5,15 @@ import Home from './pages/home';
 import Setting from './pages/setting';
 import Web from './pages/web';
 
+import Container from './store';
+
 const App: React.FC = () => {
   return (
-    <div>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/setting' component={Setting} />
-        <Route exact path='/web' component={Web} />
-    </div>
+    <Container>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/setting' component={Setting} />
+      <Route exact path='/web' component={Web} />
+    </Container>
   );
 }
 

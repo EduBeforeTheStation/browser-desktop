@@ -29,14 +29,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.init = exports.Context = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = __importStar(require("react"));
-var store_1 = require("../../store");
-require("./style.css");
-var Tab = function (_a) {
-    var idx = _a.idx, favicon = _a.favicon, title = _a.title, isClicked = _a.isClicked;
-    var removeTabs = react_1.useContext(store_1.Context).removeTabs;
-    return (jsx_runtime_1.jsxs("div", __assign({ className: "tab_item " + (isClicked ? 'clicked' : '') }, { children: [jsx_runtime_1.jsx("img", { className: "favicon", src: favicon, alt: 'favicon' }, void 0), jsx_runtime_1.jsxs("p", __assign({ className: 'site_title' }, { children: ["\u00A0", title] }), void 0), isClicked !== null && isClicked !== void 0 ? isClicked : jsx_runtime_1.jsx("p", __assign({ onClick: function () { return removeTabs(idx); } }, { children: "X" }), void 0)] }), void 0));
+exports.Context = react_1.default.createContext({});
+exports.init = { image1: { useable: false }, image2: { useable: false }, };
+var Container = function (props) {
+    var defaultTab = {
+        url: '/',
+        history: ['/'],
+    };
+    var _a = react_1.useState([defaultTab]), tabs = _a[0], setTabs = _a[1];
+    var addTab = react_1.useCallback(function () {
+        setTabs(__spreadArray(__spreadArray([], tabs), [defaultTab]));
+    }, [tabs]);
+    var removeTab = react_1.useCallback(function (idx) {
+        var new_tabs = tabs;
+        setTabs(new_tabs.splice(idx));
+    }, [tabs]);
+    return (jsx_runtime_1.jsx(exports.Context.Provider, __assign({ value: { tabs: tabs, addTab: addTab, removeTab: removeTab } }, { children: props.children }), void 0));
 };
-exports.default = react_1.default.memo(Tab);
+exports.default = Container;

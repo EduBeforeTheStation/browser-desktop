@@ -32,10 +32,10 @@ function createWindow() {
     mainWindow = new electron_1.BrowserWindow({
         height: 800,
         webPreferences: {
-            preload: path.join(__dirname, "preload.js"),
+            preload: path.join(__dirname, "/preload.js"),
             devTools: isDev,
-            webviewTag: true,
-            contextIsolation: true
+            nodeIntegration: false,
+            webviewTag: true
         },
         width: 1280,
         frame: false,

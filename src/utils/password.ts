@@ -100,4 +100,20 @@ export default class Database extends EventEmitter {
             return false;
         }
     }
+    public CheckPassword(passphrase: string): boolean {
+        try {
+            const encs = this._db.value();
+            if (Object.keys(encs).length > 0) {
+                const firkey = Object.keys(encs)[0];
+                console.log(passphrase);
+                const res = decrypt(encs[firkey], shakeKey(passphrase));
+                console.log(res);
+                if (res == "") return false;
+                return true;
+            }
+            return true;
+        } catch {
+            return false;
+        }
+    }
 }

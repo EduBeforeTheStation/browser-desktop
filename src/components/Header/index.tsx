@@ -33,15 +33,19 @@ const Header: React.FC = () => {
     setInputURL(e.target.value);
   }, [inputURL]);
 
+  const onUrlChanging = (tab: any, url:string) => {
+    if (new URL(url).protocol == "http:")
+    if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?"))
+      tab.history.goBack();
+  };
+
   const searchFormSubmitHandler = useCallback((e: any) => {
     e.preventDefault();
       tabs.forEach((tab: any, i: number) => {
         if (tab.isClicked) {
           const new_data = tabs[i];
           let url = inputURL;
-          if (new URL(inputURL).protocol == "http:")
-          if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?"))
-            new_data.history.goBack();
+          onUrlChanging(new_data, url);
           if (inputURL.indexOf('https') === -1 && inputURL.indexOf('http') === -1) {
             url = `https://duckduckgo.com/?q=${inputURL}`;
             setInputURL(url); 

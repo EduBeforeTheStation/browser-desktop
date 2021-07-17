@@ -134,13 +134,6 @@
         socket.onerror = function (error) {
             console.error(`[ws] ${error.message}`);
         };
-        send = (select) => {
-            console.log(select);
-            socket.send(JSON.stringify({
-                channel: "visithistory",
-                data: select
-            }));
-        }
     </script>
 </body>
 

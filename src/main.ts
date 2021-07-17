@@ -3,6 +3,16 @@ import * as path from "path";
 import * as isDev from 'electron-is-dev';
 
 let mainWindow: BrowserWindow;
+let loginWindow: BrowserWindow;
+let passphrase: string;
+
+import passDataBase1, { decrypt, encrypt, shakeKey as shakeKey2 } from './utils/password'
+
+const a = new passDataBase1();
+a.SetPassword("naver.com", encrypt("passw0ord!", shakeKey2("passphrase")));
+a.Save();
+console.log(decrypt(encrypt("passw0ord!", shakeKey2("passphrase")), shakeKey2("passphrase")))
+
 function createWindow() {
   session.defaultSession.clearStorageData();
 
@@ -27,7 +37,7 @@ function createWindow() {
   mainWindow.loadURL(isDev ? `http://localhost:3000` : `file://${path.join(__dirname, "../build/index.html")}`);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished
@@ -65,10 +75,20 @@ ipcMain.on('fetchTab', (event, args) => {
   event.reply('fetchTab', null);
 });
 
-import * as userdata from './utils/userdata';
-const userDataBase = new userdata.Database();
+app.on("ready", () => {
+  loginWindow = new BrowserWindow({
+    height: 600,
+    width: 800,
+    alwaysOnTop: true,
+    frame: false
+  });
 
-console.log(userdata.userDataPath);
+  loginWindow.loadURL(path.join(isDev ? `http://localhost:3000/` : `file://${__dirname}/`, "password.html"));
+});
+
+import * as userdata from './utils/userdata';
+import passDataBase, { shakeKey } from './utils/password';
+const userDataBase = new userdata.Database();
 
 import WebSocket from "ws";
 import EventEmitter from "events";
@@ -94,7 +114,6 @@ class WebSoc extends EventEmitter {
     }));
   }
 }
-
 const socket = new WebSoc(3030);
 socket.on('select-engine', (select: "DuckDuckGo" | "Google") => {
   console.log(select);
@@ -102,6 +121,17 @@ socket.on('select-engine', (select: "DuckDuckGo" | "Google") => {
   settings.SearchEngine = userdata.DefaultSearchers[select];
   userDataBase.SetSettings(settings);
   userDataBase.Save();
+});
+
+socket.on('password', (password) => {
+  const database = new passDataBase();
+  const result = database.CheckPassword(password);
+  if (result){
+    loginWindow.close();
+    passphrase = password;
+  }
+  else
+    socket.send('password', "비밀번호가 맞지 않습니다.")
 });
 
 socket.on('settings', () => {

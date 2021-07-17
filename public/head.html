@@ -11,8 +11,7 @@
   }
 
   #root {
-    width: 100%;
-    height: 100%;
+    height: calc(100% - 40px);
     overflow-y: scroll;
   }
 
@@ -27,5 +26,36 @@
     align-items: center;
     background-color: #fff;
     z-index: 1000;
+  }
+
+  #hexagon {
+    width: 100px;
+    height: 55px;
+    background: pink;
+    position: relative;
+  }
+
+  #hexagon:before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid pink;
+  }
+
+  #hexagon:after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25px solid pink;
   }
 </style>

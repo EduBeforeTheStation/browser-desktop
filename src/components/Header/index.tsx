@@ -10,18 +10,6 @@ const Header: React.FC = () => {
   };
   const { tabs }: any = useContext(Context);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    console.log(window.ipcRenderer);
-  }, []);
-=======
-  const Tabs = [
-    <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} idx={1} title={'김병주'} isClicked={true} />,
-    <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} idx={2} title={'강태영'} isClicked={false} />
-  ];
->>>>>>> db95e6469e75bc9545f4545a6037316de13c953e
-
-
   return (
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
@@ -38,13 +26,8 @@ const Header: React.FC = () => {
           }}>
             <img src='./assets/images/full.svg' alt='icon-x' />
           </div>
-<<<<<<< HEAD
           <div className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
             <img src='./assets/images/quit.svg' alt='icon-x' />
-=======
-          <div id="quit-btn" className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
-            <img src='./images/quit.svg' alt='icon-x' />
->>>>>>> db95e6469e75bc9545f4545a6037316de13c953e
           </div>
         </div>
       </div>

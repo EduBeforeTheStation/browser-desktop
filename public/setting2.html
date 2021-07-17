@@ -22,8 +22,8 @@
         }
 
         .logo {
-            position:fixed;
-            left:20px;
+            position: fixed;
+            left: 20px;
             width: 10%;
             height: 6%;
         }
@@ -59,36 +59,35 @@
             margin: 20px 0 0 50px;
         }
 
-        .detail {
+        .info {
             font-size: 22px;
-            margin: 50px 0 30px 30px;
+            margin: 20px 0 10px 0;
             font-family: 'noto';
         }
 
-        .detail_list {
+        .info_list {
             display: block;
+            margin: 0 0 0 30px;
         }
 
-        .detail_list_box {
-            margin: 0 auto;
+        .login_box {
+            margin: 10px 0 0 50px;
             font-size: 22px;
             font-family: 'noto';
-            border-bottom: 1px solid black;
             width: 90%;
             justify-content: space-between;
         }
 
-        .detail_text {
+        .login_text {
             margin: 10px 0px 10px 10px;
-            width: 30%;
         }
 
-        .detail_a {
+        .login_a {
             display: flex;
             justify-content: space-between;
         }
 
-        .arrow {
+        .quit {
             margin: 16px 20px 0 0;
             width: 20px;
             height: 20px;
@@ -143,6 +142,45 @@
             -ms-transform: translateX(26px);
             transform: translateX(26px);
         }
+
+
+        .info_box {
+            margin: 0 0 0 30px;
+            font-size: 22px;
+            font-family: 'noto';
+            width: 90%;
+            justify-content: space-between;
+            display: flex;
+        }
+
+        .info_text {
+            font-size: 22px;
+            font-family: 'noto';
+            margin: 10px 0px 10px 10px;
+        }
+
+        .info_text2 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 15px 0 0 40px;
+            color: #BEBEBE;
+        }
+
+        .info_text3 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 15px 0 0 40px;
+        }
+
+        .info_text4 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 20px 0 0 40px;
+        }
+
+        .info_a {
+            display: flex;
+        }
     </style>
 </head>
 
@@ -150,45 +188,43 @@
     <img src="./assets/images/logo.svg" class="logo">
     <div class="panel">
         <div class="title_box">
-            <p class="title">설정</p>
+            <p class="title">비밀번호</p>
         </div>
         <div class="select_box">
-            <p class="select">검색 엔진 설정</p>
+            <p class="select">로그인 설정</p>
         </div>
-        <div>
-            <a href="./">
-                <img src="./assets/images/duckduckgoselect.svg" class="images active">
-            </a>
-            <a href="./">
-                <img src="./assets/images/googlebtn.svg" class="images">
-            </a>
+        <div class="login_box">
+            <div class="login_a">
+                <p class="login_text">자동 로그인</p>
+                <label class="switch-button"> <input type="checkbox" /> <span class="onoff-switch"></span> </label>
+            </div>
         </div>
-        <div class="detail_box">
-            <p class="detail">세부 설정</p>
+        <div class="info_box">
+            <p class="info">비밀번호 정보</p>
         </div>
-        <div class="detail_list">
-            <div class="detail_list_box">
-                <a href="./" class="detail_a">
-                    <p class="detail_text">방문 기록 삭제</p>
-                    <img src="./assets/images/arrow.svg" class="arrow">
+        <div class="info_list">
+            <div class="info_box">
+                <a href="./" class="info_a">
+                    <img src="./assets/images/quit.svg" class="quit"><!--favicon.ico-->
+                    <p class="info_text">Naver</p>
+                    <p class="info_text2">www.naver.com</p>
+                    <p class="info_text3">kkttyy324</p>
+                    <p class="info_text4">***************</p>
+                </a>
+                <a href="./">
+                    <img src="./assets/images/quit.svg" class="quit">
                 </a>
             </div>
-            <div class="detail_list_box">
-                <div class="detail_a">
-                    <p class="detail_text">북마크 표시</p>
-                    <label class="switch-button"> <input type="checkbox" /> <span class="onoff-switch"></span> </label>
-                </div>
-            </div>
-            <div class="detail_list_box">
-                <div class="detail_a">
-                    <p class="detail_text">http 보안 경고 표시</p>
-                    <label class="switch-button"> <input type="checkbox" /> <span class="onoff-switch"></span> </label>
-                </div>
-            </div>
-            <div class="detail_list_box">
-                <a href="./" class="detail_a">
-                    <p class="detail_text">비밀번호 저장</p>
-                    <img src="./assets/images/arrow.svg" class="arrow">
+            <div class="info_box">
+                <a href="./" class="info_a">
+                    <img src="./assets/images/quit.svg" class="quit"><!--favicon.ico-->
+                    <p class="info_text">Naver</p>
+                    <p class="info_text2">www.naver.com</p>
+                    <p class="info_text3">kkttyy324</p>
+                    <p class="info_text4">***************</p>
+                </a>
+                <a href="./">
+                    <img src="./assets/images/quit.svg" class="quit">
                 </a>
             </div>
         </div>

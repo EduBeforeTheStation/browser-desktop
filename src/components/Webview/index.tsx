@@ -1,5 +1,7 @@
+import { WebContents } from 'electron';
 import React, { useEffect, useRef, useContext } from 'react';
 import { Context } from '../../store';
+import './style.css';
 
 const Webview: React.FC<any> = ({ idx }) => {
   const { tabs, updateTab }: any = useContext(Context);
@@ -27,7 +29,7 @@ const Webview: React.FC<any> = ({ idx }) => {
   }, []);
 
   return (
-    <webview className="webview" ref={webviewRef} src={tabs[idx].url} style={{ display: tabs[idx].isClicked ? 'block' : 'none' }}></webview>
+    <webview className="webview" ref={webviewRef} src={tabs[idx].url}></webview>
   );
 };
 

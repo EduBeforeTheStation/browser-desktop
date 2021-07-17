@@ -1,9 +1,11 @@
-import { app, BrowserWindow, ipcMain, protocol } from "electron";
+import { app, BrowserWindow, ipcMain, protocol, session } from "electron";
 import * as path from "path";
 import * as isDev from 'electron-is-dev';
 
 let mainWindow: BrowserWindow;
 function createWindow() {
+  session.defaultSession.clearStorageData();
+
   protocol.registerFileProtocol('haos', (request, callback) => {
     const url = request.url.substr(`haos://`.length);
     callback({ path: path.normalize(`${__dirname}/${url}`) });
@@ -23,10 +25,6 @@ function createWindow() {
 
   // and load the index.html of the app.
   mainWindow.loadURL(isDev ? `http://localhost:3000` : `file://${path.join(__dirname, "../build/index.html")}`);
-
-  mainWindow.webContents.on('will-navigate', (event, url) => {
-    // url이 https인지 검사하고 http일시 경고 전송
-  });
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -49,9 +47,7 @@ app.on("ready", () => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  app.quit();
 });
 
 // In this file you can include the rest of your app"s specific main process

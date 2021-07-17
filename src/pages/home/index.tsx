@@ -8,10 +8,10 @@ import Header from '../../components/Header';
 const Home: React.FC = () => {
   const { tabs }: any = useContext(Context);
   return (
-    <main>
+    <>
       <Header />
       {tabs.map(({ url }: any, i: number) => <Webview idx={i} />)}
-    </main>
+    </>
   );
 };
 

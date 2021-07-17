@@ -10,11 +10,19 @@ const Header: React.FC = () => {
   };
   const { tabs }: any = useContext(Context);
 
+  const trigger = () => {
+    console.log('trick');
+  };
+
+  useEffect(() => {
+    console.log('catch');
+  }, [tabs]);
+
   return (
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
-        <div className="tabs_wrapper">{tabs.map(({ url }: { url: string}, i: number) => (
-          <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} idx={i} title={'김병주'} isClicked={true} />
+        <div className="tabs_wrapper">{tabs.map(({ url, title }: { url: string, title: string }, i: number) => (
+          <Tab idx={i} isClicked={true} />
         ))}</div>
         <div className="tab_menu_buttons_wrapper">
           <div className="tab_menu_button" onClick={tabMenuButtonClickHandler}>

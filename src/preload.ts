@@ -6,7 +6,7 @@ import electron from "electron";
 
 window.addEventListener("DOMContentLoaded", () => {
   console.log("DOM");
-  const quit_btn = document.getElementById('quit-btn');
+  const quit_btn = document.getElementById('quit_btn');
   quit_btn?.addEventListener('click', () => {
     if (confirm('really quit?')) {
       ipcRenderer.send('quit');

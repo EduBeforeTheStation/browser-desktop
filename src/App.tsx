@@ -6,13 +6,16 @@ import Setting from './pages/setting';
 import Web from './pages/web';
 
 import Container from './store';
+import WebSocketProvider from './store/ws';
 
 const App: React.FC = () => {
   return (
     <Container>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/setting' component={Setting} />
-      <Route exact path='/web' component={Web} />
+      <WebSocketProvider>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/setting' component={Setting} />
+        <Route exact path='/web' component={Web} />
+      </WebSocketProvider>
     </Container>
   );
 }

@@ -9,6 +9,7 @@ const Header: React.FC = () => {
   const [inputURL, setInputURL] = useState<string>('');
   const tablineRef = useRef(null);
   const searchRef = useRef(null);
+  const reloadBtnRef = useRef(null);
   const tabMenuButtonClickHandler = () => {
     //alert('quit');
   };

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background-color: #f1f2f3;
+        }
+
+        .hexagon {
+            margin: 100px auto;
+            width: 55%;
+            height: 40px;
+            background: white;
+            position: relative;
+            border-radius: 7px;
+            text-align: center;
+            box-shadow: 0 2px 3px -2px gray;
+        }
+
+        .hexagon:before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-bottom: 20px solid transparent;
+            border-top: 20px solid transparent;
+            border-right: 13px solid white;
+            border-radius: 7px;
+        }
+
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border-bottom: 20px solid transparent;
+            border-top: 20px solid transparent;
+            border-left: 13px solid white;
+            border-radius: 7px;
+        }
+
+        .search_bar{
+            margin:13px 0 0 0;
+            font-size:12px;
+            padding: 0;
+            border: 0;
+            width:96%;
+            background-color: white;
+        }
+        .search_bar:focus{
+            outline: none;
+        }
+        .search_bar::placeholder{
+            color:#BEBEBE;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hexagon">
+        <input type="text" class="search_bar" placeholder="검색어나 url을 입력해주세요.">
+    </div>
+</body>
+
+</html>

@@ -28,7 +28,6 @@ const Container: React.FC<{ children: React.ReactNode }> = (props) => {
 
   const updateTab = useCallback((idx: number, data: any) => {
     const new_tabs = tabs;
-    console.log(data);
     new_tabs[idx] =  { ...defaultTab, ...data };
     setTabs(new_tabs);
   }, [tabs]);

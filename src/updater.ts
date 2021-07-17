@@ -4,6 +4,7 @@ import { autoUpdater as updater } from "electron-updater";
 export class Updater {
     updateWin: BrowserWindow | undefined;
     constructor() {
+        console.log("create!!!!");
         updater.on("checking-for-update", () =>
             this.sendStatusToWindow("Checking for update..."));
         updater.on("update-available", () => {
@@ -58,5 +59,18 @@ export class Updater {
     sendStatusToWindow(text: string): void {
         if (this.updateWin?.webContents)
             this.updateWin?.webContents.send("message", text);
+    }
+    onReady() {
+        this.updateWin = new BrowserWindow({
+            backgroundColor: "#eeeeee",
+            webPreferences: { nodeIntegration: true, contextIsolation: false },
+            show: false
+        });
+
+        this.updateWin.on("closed", () => {
+            this.updateWin = undefined;
+        });
+        this.updateWin.loadURL(`file://${__dirname}/../public/updater.html#v${app.getVersion()}`);
+        updater.checkForUpdates();
     }
 }

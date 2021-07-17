@@ -11,7 +11,7 @@ const Tab: React.FC<ITabProps> = ({ idx, isClicked }) => {
   const { tabs, removeTabs }: any = useContext(Context);
 
   const favicon = `https://s2.googleusercontent.com/s2/favicons?domain=${tabs[idx].url}`;
-
+  
   return (
     <div className={`tab_item ${isClicked ? 'clicked' : ''}`}>
       <img className="favicon" src={favicon} alt='favicon' />

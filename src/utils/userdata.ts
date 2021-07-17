@@ -13,10 +13,35 @@ export interface VisitHistory {
     url: string,
     title: string
 }
-
 export interface SearchHistory {
     text: string,
     link: string
+}
+
+
+export type UrlConstructor = (query: string) => string;
+export class Searcher {
+    name: string
+    keyword: Array<string>
+    urlConstructor: UrlConstructor
+    constructor(name: string, keyword: Array<string>, urlConstructor: UrlConstructor) {
+        this.name = name;
+        this.keyword = keyword;
+        this.urlConstructor = urlConstructor;
+    }
+}
+export const DefaultSearchers = {
+    "DuckDuckGo": new Searcher("DuckDuckGo", ["duckduckgo.com", "ddg.gg"], (query: string) => {
+        return `https://duckduckgo.com/?q=${query}`;
+    }),
+    "Google": new Searcher("Google", ["google.com"], (query: string) => {
+        return `https://www.google.com/search?q=${query}`;
+    })
+}
+
+export interface Settings {
+    SearchEngine: Searcher,
+    HttpAlert: boolean
 }
 
 export class Database {

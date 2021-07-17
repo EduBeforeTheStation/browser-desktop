@@ -1,8 +1,6 @@
 import { app, BrowserWindow, ipcMain, protocol } from "electron";
 import * as path from "path";
 import * as isDev from 'electron-is-dev';
-import { defaultSearchEngine, userDataPath } from "./utils/userdata";
-import { decrypt, encrypt, shakeKey } from "./utils/password";
 
 let mainWindow: BrowserWindow;
 function createWindow() {
@@ -12,17 +10,18 @@ function createWindow() {
   });
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    height: 600,
+    height: 800,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      devTools: isDev
+      devTools: isDev,
+      webviewTag: true
     },
-    width: 800,
+    width: 1280,
     frame: false,
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(defaultSearchEngine);
+  mainWindow.loadURL(isDev ? `http://localhost:3000` : `file://${path.join(__dirname, "../build/index.html")}`);
 
   mainWindow.webContents.on('will-navigate', (event, url) => {
     // url이 https인지 검사하고 http일시 경고 전송
@@ -60,25 +59,10 @@ app.on("window-all-closed", () => {
 import { Updater } from "./updater";
 new Updater();
 
-import { mainReloader, rendererReloader } from 'electron-hot-reload';
-
-const mainFile = path.join(app.getAppPath(), 'dist', 'main.js');
-const rendererFile = path.join(app.getAppPath(), 'dist', 'preload.js');
-
-mainReloader(mainFile, undefined, (error, path) => {
-  if (error) {
-    console.error(error);
-  }
-  console.log("It is a main's process hook!");
-});
-
-rendererReloader(rendererFile, undefined, (error, path) => {
-  if (error) {
-    console.error(error);
-  }
-  console.log("It is a renderer's process hook!");
-});
-
 ipcMain.on('quit', (event, args) => {
   app.quit();
+});
+
+ipcMain.on('fetchTab', (event, args) => {
+  event.reply('fetchTab', null);
 });

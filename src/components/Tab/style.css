@@ -1,0 +1,26 @@
+.tab_item {
+  width: 120px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 8px;
+  background-color: rgba(255, 255, 255, .25);
+  border-left: 1px solid #000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 1000;
+}
+
+.clicked {
+  background-color: #fff !important;
+}
+
+.tab_item .favicon {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 5px 0 0;
+}
+
+.tab_item .site_title {
+  font-size: 12px;
+}

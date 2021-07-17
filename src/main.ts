@@ -87,7 +87,7 @@ class WebSoc extends EventEmitter {
       });
     });
   }
-  send(channel: string, data: any){
+  send(channel: string, data: any) {
     this.ws?.send(JSON.stringify({
       channel: channel,
       data: data
@@ -105,9 +105,22 @@ socket.on('select-engine', (select: "DuckDuckGo" | "Google") => {
 });
 
 socket.on('settings', () => {
-  console.log("on setting")
   const settings: userdata.Settings = userDataBase.GetSettings();
   socket.send('settings', settings);
+});
+
+socket.on('visithistory', () => {
+  const histories: Array<userdata.VisitHistory> = userDataBase.GetVisitHistories();
+  socket.send('visithistory', histories);
+});
+
+socket.on('visit', (data) => {
+  const { title, location } = data;
+  const history: userdata.VisitHistory = {
+    title: title,
+    url: location
+  }
+  userDataBase.AddVisitHistory(history);
 });
 
 /*

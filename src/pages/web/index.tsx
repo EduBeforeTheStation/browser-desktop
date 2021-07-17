@@ -1,12 +1,17 @@
 import Header from '../../components/Header';
 import './style.css';
+import { Context } from '../../store';
+import { useContext } from 'react';
+import Webview from '../../components/Webview';
 
-const Web = () => {
+const Web: React.FC = () => {
+  const { tabs }: any = useContext(Context);
 
   return (
-    <div>
-      <webview className="webview" src='https://duckduckgo.com/'></webview>
-    </div>
+    <>
+      <Header />
+      {tabs.map(({ url }: any, i: number) => <Webview idx={i} />)}
+    </>
   );
 }
 

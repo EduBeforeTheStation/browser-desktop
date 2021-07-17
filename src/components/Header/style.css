@@ -9,10 +9,6 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
 
-.add_tab_button {
-  z-index: 1000;
-}
-
 .tab_line {
   display: flex;
   height: 40px;
@@ -51,7 +47,11 @@
 }
 
 .control_bar_wrapper {
+<<<<<<< HEAD
   height: 50px;
+=======
+  height: 65px;
+>>>>>>> ed31321d4edfd35673db0a424abcb5f6b65e7582
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -86,10 +86,5 @@
 
 .control_bar_wrapper .search_box:focus {
   outline: none;
-}
-
-.bottom_bar {
-  width: 100%;
-  background-color: #fff;
 }
 

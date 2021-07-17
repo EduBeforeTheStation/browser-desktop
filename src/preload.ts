@@ -12,3 +12,5 @@ window.addEventListener("DOMContentLoaded", () => {
     replaceText(`${type}-version`, process.versions[type as keyof NodeJS.ProcessVersions] || "");
   }
 });
+
+import { } from 'node-machine-id';

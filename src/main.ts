@@ -1,9 +1,12 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
+import { defaultSearchEngine, userDataPath } from "./userdata";
 
+let mainWindow: BrowserWindow;
 function createWindow() {
+  console.log(userDataPath);
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -12,7 +15,11 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL("https://duckduckgo.com/");
+  mainWindow.loadURL(defaultSearchEngine);
+
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    // url이 https인지 검사하고 http일시 경고 전송
+  });
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -42,3 +49,7 @@ app.on("window-all-closed", () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.on('test', (event, args) => {
+
+});

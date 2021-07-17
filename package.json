@@ -41,7 +41,9 @@
     }
   ],
   "license": "CC0-1.0",
-  "dependencies": {},
+  "dependencies": {
+    "node-machine-id": "^1.1.12"
+  },
   "devDependencies": {
     "@types/node": "^16.3.3",
     "@typescript-eslint/eslint-plugin": "^4.28.3",

@@ -8,9 +8,11 @@ export const userDataPath = (electron.app || electron.remote.app).getPath(
 );
 
 export const configPath = path.resolve(userDataPath, "config.json")
-
 export const defaultSearchEngine = "https://duckduckgo.com/";
 
 export class Config extends EventEmitter {
+    constructor() {
+        super();
+    }
     
 }

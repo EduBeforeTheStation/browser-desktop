@@ -14,6 +14,7 @@ function createWindow() {
       devTools: isDev
     },
     width: 800,
+    frame: false,
   });
 
   // and load the index.html of the app.
@@ -56,11 +57,11 @@ import { mainReloader, rendererReloader } from 'electron-hot-reload';
 
 const mainFile = path.join(app.getAppPath(), 'dist', 'main.js');
 const rendererFile = path.join(app.getAppPath(), 'dist', 'renderer.js');
- 
+
 mainReloader(mainFile, undefined, (error, path) => {
   console.log("It is a main's process hook!");
 });
- 
+
 rendererReloader(rendererFile, undefined, (error, path) => {
   console.log("It is a renderer's process hook!");
 });

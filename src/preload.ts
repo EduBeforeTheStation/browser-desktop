@@ -11,4 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
   for (const type of ["chrome", "node", "electron"]) {
     replaceText(`${type}-version`, process.versions[type as keyof NodeJS.ProcessVersions] || "");
   }
+
+
+  const template = document.createElement('template');
+  template.innerHTML = `<div style="position: fixed;color: white;">
+  <p>TITLE!!!!!!!!!!!!!!!!!!!!!!!!</p>
+</div>`;
+  if( template.content.firstChild)
+    document.body.prepend(template.content.firstChild);
 });

@@ -54,8 +54,8 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and require them here.
 
 import { Updater } from "./updater";
-const updater = new Updater();
-app.on('ready', updater.onReady);
+//const updater = new Updater();
+//app.on('ready', updater.onReady);
 
 ipcMain.on('quit', (event, args) => {
   app.quit();
@@ -68,14 +68,60 @@ ipcMain.on('fetchTab', (event, args) => {
 import * as userdata from './utils/userdata';
 const userDataBase = new userdata.Database();
 
-ipcMain.on('select-engine', (event, select: "DuckDuckGo" | "Google") => {
+console.log(userdata.userDataPath);
+
+import WebSocket from "ws";
+import EventEmitter from "events";
+
+class WebSoc extends EventEmitter {
+  wss: WebSocket.Server
+  ws: WebSocket | undefined
+  constructor(port: number) {
+    super();
+    this.wss = new WebSocket.Server({ port: port });
+    this.wss.on("connection", ws => {
+      this.ws = ws;
+      ws.on("message", (recv) => {
+        const { channel, data } = JSON.parse(recv.toString());
+        this.emit(channel, data);
+      });
+    });
+  }
+  send(channel: string, data: any){
+    this.ws?.send(JSON.stringify({
+      channel: channel,
+      data: data
+    }));
+  }
+}
+
+const socket = new WebSoc(3030);
+socket.on('select-engine', (select: "DuckDuckGo" | "Google") => {
+  console.log(select);
   const settings: userdata.Settings = userDataBase.GetSettings();
   settings.SearchEngine = userdata.DefaultSearchers[select];
   userDataBase.SetSettings(settings);
   userDataBase.Save();
 });
 
-ipcMain.on('get-engine', (event: IpcMainEvent) => {
+socket.on('settings', () => {
+  console.log("on setting")
   const settings: userdata.Settings = userDataBase.GetSettings();
-  event.reply('get-engine', settings.SearchEngine);
+  socket.send('settings', settings);
 });
+
+/*
+
+console.log(data.select);
+    const settings: userdata.Settings = userDataBase.GetSettings();
+    settings.SearchEngine = userdata.DefaultSearchers[data.select];
+    userDataBase.SetSettings(settings);
+    userDataBase.Save();
+ipcMain.on('select-engine', (event, select: "DuckDuckGo" | "Google") => {
+});
+
+ipcMain.on('settings', (event: IpcMainEvent) => {
+  const settings: userdata.Settings = userDataBase.GetSettings();
+  event.reply('settings', settings);
+});
+*/

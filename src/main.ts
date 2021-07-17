@@ -3,15 +3,12 @@ import * as path from "path";
 import * as isDev from 'electron-is-dev';
 
 let mainWindow: BrowserWindow;
-let loginWindow: BrowserWindow;
-let passphrase: string;
+let signinWindow: BrowserWindow;
+let signupWindow: BrowserWindow;
+let hash: string;
 
-import passDataBase1, { decrypt, encrypt, shakeKey as shakeKey2 } from './utils/password'
-
-const a = new passDataBase1();
-a.SetPassword("naver.com", encrypt("passw0ord!", shakeKey2("passphrase")));
-a.Save();
-console.log(decrypt(encrypt("passw0ord!", shakeKey2("passphrase")), shakeKey2("passphrase")))
+import * as userdata from './utils/userdata';
+import passDataBase, { decrypt, encrypt, shakeKey } from './utils/password'
 
 function createWindow() {
   session.defaultSession.clearStorageData();
@@ -38,13 +35,50 @@ function createWindow() {
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
+  mainWindow.on('resize', function () {
+    setTimeout(function () {
+      const size = mainWindow.getSize();
+      mainWindow.setSize(size[0], size[0] * 9 / 16);
+    }, 0);
+  });
+}
+function createSigninWindow() {
+  signinWindow = new BrowserWindow({
+    height: 720,
+    width: 1280
+  });
+
+  signinWindow.loadURL(path.join(isDev ? `http://localhost:3000/` : `file://${__dirname}/`, "password.html"));
+
+  signinWindow.on('resize', function () {
+    setTimeout(function () {
+      const size = signinWindow.getSize();
+      signinWindow.setSize(size[0], size[0] * 9 / 16);
+    }, 0);
+  });
+}
+function createSignupWindow() {
+  signupWindow = new BrowserWindow({
+    height: 720,
+    width: 1280
+  });
+
+  signupWindow.loadURL(path.join(isDev ? `http://localhost:3000/` : `file://${__dirname}/`, "create_pass.html"));
+
+  signupWindow.on('resize', function () {
+    setTimeout(function () {
+      const size = signupWindow.getSize();
+      signupWindow.setSize(size[0], size[0] * 9 / 16);
+    }, 0);
+  });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+/*
 app.on("ready", () => {
-  createWindow();
+  //createWindow();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
@@ -52,6 +86,7 @@ app.on("ready", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
+*/
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -63,7 +98,7 @@ app.on("window-all-closed", () => {
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
 
-import { Updater } from "./updater";
+//import { Updater } from "./updater";
 //const updater = new Updater();
 //app.on('ready', updater.onReady);
 
@@ -76,18 +111,13 @@ ipcMain.on('fetchTab', (event, args) => {
 });
 
 app.on("ready", () => {
-  loginWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
-    alwaysOnTop: true,
-    frame: false
-  });
-
-  loginWindow.loadURL(path.join(isDev ? `http://localhost:3000/` : `file://${__dirname}/`, "password.html"));
+  const database = new passDataBase();
+  if (database.UsedBefore())
+    createSigninWindow();
+  else
+    createSignupWindow();
 });
 
-import * as userdata from './utils/userdata';
-import passDataBase, { shakeKey } from './utils/password';
 const userDataBase = new userdata.Database();
 
 import WebSocket from "ws";
@@ -124,12 +154,26 @@ socket.on('select-engine', (select: "DuckDuckGo" | "Google") => {
   userDataBase.Save();
 });
 
+socket.on('set-password', (password) => {
+  const database = new passDataBase();
+  if (database.UsedBefore()) {
+    signupWindow.close();
+    return;
+  }
+  database.SettingPassword(shakeKey(password));
+  console.log("database", database);
+  database.Save();
+  createWindow();
+  signupWindow.close();
+});
+
 socket.on('password', (password) => {
   const database = new passDataBase();
   const result = database.CheckPassword(password);
-  if (result){
-    loginWindow.close();
-    passphrase = password;
+  if (result) {
+    createWindow();
+    signinWindow.close();
+    hash = shakeKey(password);
   }
   else
     socket.send('password', "비밀번호가 맞지 않습니다.")
@@ -146,7 +190,7 @@ socket.on('visithistory', () => {
 });
 
 socket.on('visit', (data) => {
-  const { title, url} = data;
+  const { title, url } = data;
   const history: userdata.VisitHistory = {
     title,
     url,

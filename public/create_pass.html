@@ -11,7 +11,7 @@
         body {
             background-color: #f1f2f3;
             text-align: center;
-            background-image:url('./assets/images/pado_background.svg');
+            background-image: url('./assets/images/pado_background.svg');
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -136,15 +136,16 @@
             font-family: 'noto';
         }
 
-        .find_pass{
+        .find_pass {
             color: #BFBFBF;
             text-decoration: none;
         }
-        .find_pass:active{
-            color:gray;
+
+        .find_pass:active {
+            color: gray;
         }
 
-        .find_pass_text{
+        .find_pass_text {
             font-size: 20px;
             font-family: 'noto';
         }
@@ -155,17 +156,18 @@
             left: 0;
         }
 
-        .pass_submit{
-            border:none;
+        .pass_submit {
+            border: none;
             background-color: #54ADFD;
-            font-size:30px;
+            font-size: 30px;
             font-family: 'noto';
-            width:98%;
-            color:white;
-            height:90%;
+            width: 98%;
+            color: white;
+            height: 90%;
         }
-        .pass_submit:hover{
-            cursor:pointer;
+
+        .pass_submit:hover {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -180,14 +182,38 @@
     <div class="top_bar">
         <div class="hexagon">
             <img src="./assets/images/lock.svg" class="lock_image">
-            <input type="text" class="search_bar" placeholder="비밀번호 설정">
+            <input id="pwd" type="text" class="search_bar" placeholder="비밀번호 설정">
         </div>
     </div>
     <div class="bottom_bar">
         <div class="hexagon2">
-            <input type="submit" class="pass_submit" value="비밀번호 설정">
+            <input type="submit" class="pass_submit" value="비밀번호 설정" onclick="submit();">
         </div>
     </div>
+
+    <script>
+        let socket = new WebSocket("ws://localhost:3030");
+        socket.onopen = function (e) {
+            console.log("[ws] open");
+        };
+
+        socket.onmessage = function (recv) {
+            let { channel, data } = JSON.parse(recv.data);
+            switch (channel) {
+                case "password":
+                    alert(data);
+                    break;
+            }
+        };
+
+        submit = () => {
+            socket.send(JSON.stringify({
+                channel: "set-password",
+                data: document.getElementById("pwd").value
+            }));
+            return false;
+        }
+    </script>
 </body>
 
 </html>

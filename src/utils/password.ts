@@ -29,6 +29,15 @@ export function decrypt(encrypted: string, key: string): string {
     return plain;
 }
 
+export const Base64 = {
+    encode: (plain: string) => {
+        return Buffer.from(plain, 'utf-8').toString('base64');
+    },
+    decode: (encrypted: string) => {
+        return Buffer.from(encrypted, 'base64').toString('utf-8');
+    }
+}
+
 export default class Database extends EventEmitter {
     _db!: StormDB;
     _onerror: boolean;
@@ -68,7 +77,7 @@ export default class Database extends EventEmitter {
     public SetPassword(domain: string, encrypted: string): boolean {
         try {
             if (this._onerror) throw "An error occurred while decrypting the database.";
-            this._db.set(domain, encrypted);
+            this._db.set(Base64.encode(domain), encrypted);
             return true;
         } catch {
             return false;
@@ -77,7 +86,7 @@ export default class Database extends EventEmitter {
     public GetPassword(domain: string): string | boolean {
         try {
             if (this._onerror) throw "An error occurred while decrypting the database.";
-            return this._db.get(domain).value() as unknown as string;
+            return this._db.get(Base64.encode(domain)).value() as unknown as string;
         } catch {
             return false;
         }
@@ -85,7 +94,7 @@ export default class Database extends EventEmitter {
     public SetDecrypted(domain: string, value: string, passphrase: string): string | boolean {
         try {
             if (this._onerror) throw "An error occurred while decrypting the database.";
-            this._db.set(domain, encrypt(value, shakeKey(passphrase)));
+            this._db.set(Base64.encode(domain), encrypt(value, shakeKey(passphrase)));
             return true;
         } catch {
             return false;
@@ -94,7 +103,7 @@ export default class Database extends EventEmitter {
     public GetDecrypted(domain: string, passphrase: string): string | boolean {
         try {
             if (this._onerror) throw "An error occurred while decrypting the database.";
-            const encrypted = this._db.get(domain).value() as unknown as string;
+            const encrypted = this._db.get(Base64.encode(domain)).value() as unknown as string;
             return decrypt(encrypted, shakeKey(passphrase));
         } catch {
             return false;
@@ -105,13 +114,33 @@ export default class Database extends EventEmitter {
             const encs = this._db.value();
             if (Object.keys(encs).length > 0) {
                 const firkey = Object.keys(encs)[0];
-                console.log(passphrase);
+                console.log(encs[firkey], passphrase);
                 const res = decrypt(encs[firkey], shakeKey(passphrase));
                 console.log(res);
                 if (res == "") return false;
                 return true;
             }
             return true;
+        } catch {
+            return false;
+        }
+    }
+    public SettingPassword(encrypted: string): boolean {
+        try{
+            console.log(encrypted);
+            this.SetPassword(Base64.encode('_checker_'), encrypt(SHA256(Math.random().toString()).toString(), encrypted));
+            console.log("complete!");
+            return true;
+        }catch (err){
+            console.log(err);
+            return false;
+        }
+    }
+    public UsedBefore(): boolean {
+        try {
+            const encs = this._db.value();
+            console.log("keys", encs);
+            return (Object.keys(encs).length > 0);
         } catch {
             return false;
         }

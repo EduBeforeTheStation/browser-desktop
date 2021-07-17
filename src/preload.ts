@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   Promise
-    .all([headLoad])
+    .all([headLoad, bodyLoad])
     .then(afterLoadProcess)
     .catch(exceptionProcess);
 });

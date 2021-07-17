@@ -1,0 +1,11 @@
+.webview {
+  width: 100%;
+  height: calc(100vh - 35px);
+}
+
+.tabs_wrapper {
+  width: 100%;
+  display: flex;
+  background-color: #bebebe;
+  -webkit-app-region: drag;
+}

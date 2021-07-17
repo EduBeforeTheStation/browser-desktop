@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
-import { defaultSearchEngine, userDataPath } from "./userdata";
+import * as isDev from 'electron-is-dev';
+import { defaultSearchEngine, userDataPath } from "./utils/userdata";
 
 let mainWindow: BrowserWindow;
 function createWindow() {
@@ -10,6 +11,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      devTools: isDev
     },
     width: 800,
   });
@@ -49,6 +51,19 @@ app.on("window-all-closed", () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+import { mainReloader, rendererReloader } from 'electron-hot-reload';
+
+const mainFile = path.join(app.getAppPath(), 'dist', 'main.js');
+const rendererFile = path.join(app.getAppPath(), 'dist', 'renderer.js');
+ 
+mainReloader(mainFile, undefined, (error, path) => {
+  console.log("It is a main's process hook!");
+});
+ 
+rendererReloader(rendererFile, undefined, (error, path) => {
+  console.log("It is a renderer's process hook!");
+});
 
 /*
 ipcMain.on('test', (event, args) => {

@@ -7,7 +7,7 @@
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run typescript:build && electron ./dist/main.js",
-    "build": "npm run build:linux && npm run build:win",
+    "build": "npm run typescript:build && npm run build:linux && npm run build:win",
     "build:osx": "electron-builder --mac --publish onTagOrDraft",
     "build:linux": "electron-builder --linux --ia32 --x64 --publish onTagOrDraft",
     "build:linux32": "electron-builder --linux --ia32 --publish onTagOrDraft",
@@ -41,16 +41,27 @@
     }
   ],
   "license": "CC0-1.0",
+  "homepage": "./",
   "dependencies": {
+    "crypto-js": "^4.0.0",
     "node-machine-id": "^1.1.12"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.0.2",
     "@types/node": "^16.3.3",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "electron": "^13.1.7",
     "electron-builder": "^22.11.7",
+    "electron-hot-reload": "^0.1.4",
+    "electron-is-dev": "^2.0.0",
     "eslint": "^7.30.0",
+    "react": "^17.0.2",
+    "react-do": "^1.1.6",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
     "typescript": "^4.3.5"
   },
   "build": {

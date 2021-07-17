@@ -5,7 +5,7 @@ export const Context = React.createContext({});
 
 const Container: React.FC<{ children: React.ReactNode }> = (props) => {
   const defaultTab = {
-    url: 'https://duckduckgo.com',
+    url: '/selectengine.html',
     title: '',
     isClicked: true,
     history: [],

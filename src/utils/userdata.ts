@@ -6,8 +6,6 @@ export const userDataPath = (electron.app || electron.remote.app).getPath(
     'userData'
 );
 
-export const historyPath = path.resolve(userDataPath, "history.json");
-export const configPath = path.resolve(userDataPath, "config.json");
 export const databasePath = path.resolve(userDataPath, "database.stormdb");
 export const defaultSearchEngine = "https://duckduckgo.com/";
 
@@ -35,6 +33,29 @@ export class Database {
     public Save(): boolean {
         try {
             this._db.save();
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    public GetSearchHistories(): Array<SearchHistory> {
+        return this._db.get("history").value() as Array<SearchHistory>;
+    }
+    public AddSearchHistory(history: SearchHistory): boolean {
+        try {
+            this._db.get("history").push(history);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+    public GetSearchHistory(id: number): SearchHistory {
+        return this._db.get("history").get(id).value() as SearchHistory;
+    }
+    public SetSearchHistory(history: SearchHistory, id: number): boolean {
+        try {
+            this._db.get("history").set(id, history);
             return true;
         } catch {
             return false;

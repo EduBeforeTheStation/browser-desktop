@@ -30,7 +30,11 @@ export class Searcher {
         this.urlConstructor = urlConstructor;
     }
 }
-export const DefaultSearchers = {
+export interface DefaultSearchersType {
+    DuckDuckGo: Searcher,
+    Google: Searcher
+}
+export const DefaultSearchers: DefaultSearchersType = {
     "DuckDuckGo": new Searcher("DuckDuckGo", ["duckduckgo.com", "ddg.gg"], (query: string) => {
         return `https://duckduckgo.com/?q=${query}`;
     }),
@@ -60,6 +64,18 @@ export class Database {
             this._db.save();
             return true;
         } catch {
+            return false;
+        }
+    }
+
+    public GetSettings(): Settings {
+        return this._db.get("settings").value() as Settings; 
+    }
+    public SetSettings(settings: Settings): boolean {
+        try{
+            this._db.set("settings", settings);
+            return true;
+        }catch{
             return false;
         }
     }

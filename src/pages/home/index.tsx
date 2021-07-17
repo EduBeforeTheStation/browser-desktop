@@ -10,7 +10,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-      {tabs.map(({ url }: any, i: number) => <Webview idx={i} />)}
+      {tabs.map(({ url }, i: number) => <Webview idx={i} />)}
     </>
   );
 };

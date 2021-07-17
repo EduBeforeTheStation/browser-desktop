@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, protocol, session } from "electron";
+import { app, BrowserWindow, ipcMain, protocol, session, IpcMainEvent } from "electron";
 import * as path from "path";
 import * as isDev from 'electron-is-dev';
 
@@ -16,7 +16,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "/preload.js"),
       devTools: isDev,
-      nodeIntegration: false,
+      nodeIntegration: true,
       webviewTag: true
     },
     width: 1280,
@@ -68,6 +68,14 @@ ipcMain.on('fetchTab', (event, args) => {
 import * as userdata from './utils/userdata';
 const userDataBase = new userdata.Database();
 
-ipcMain.on('select-engine', (event, select) => {
-  userDataBase.
+ipcMain.on('select-engine', (event, select: "DuckDuckGo" | "Google") => {
+  const settings: userdata.Settings = userDataBase.GetSettings();
+  settings.SearchEngine = userdata.DefaultSearchers[select];
+  userDataBase.SetSettings(settings);
+  userDataBase.Save();
+});
+
+ipcMain.on('get-engine', (event: IpcMainEvent) => {
+  const settings: userdata.Settings = userDataBase.GetSettings();
+  event.reply('get-engine', settings.SearchEngine);
 });

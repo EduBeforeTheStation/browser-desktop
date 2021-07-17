@@ -13,6 +13,18 @@ const Header: React.FC = () => {
   };
   const { tabs, addTab, updateTab }: any = useContext(Context);
 
+  const clickGoBackButtonHandler = () => {
+    tabs.forEach((tab: any, i: number) => {
+      if (tab.isClicked) {
+        const new_data = tabs[i];
+        if (new_data.history.length  !== 1) {
+          new_data.url = new_data.history[new_data.history.length - 2];
+          new_data.history.pop(); 
+        }
+      }
+    });
+  };
+
   const searchBoxChangeHandler = useCallback((e: any) => {
     console.log(e.target.value);
     setInputURL(e.target.value);
@@ -56,7 +68,7 @@ const Header: React.FC = () => {
         </div>
       </div>
       <div className="control_bar_wrapper">
-        <button className="control_button">
+        <button className="control_button" onClick={clickGoBackButtonHandler}>
           <img src="./assets/images/go-back.svg" alt='icon-go-back' />
         </button>
         <button className="control_button">

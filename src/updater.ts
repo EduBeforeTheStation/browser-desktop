@@ -60,7 +60,7 @@ export class Updater {
         if (this.updateWin?.webContents)
             this.updateWin?.webContents.send("message", text);
     }
-    onReady() {
+    onReady(): void {
         this.updateWin = new BrowserWindow({
             backgroundColor: "#eeeeee",
             webPreferences: { nodeIntegration: true, contextIsolation: false },

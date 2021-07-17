@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, protocol } from "electron";
 import * as path from "path";
 import * as isDev from 'electron-is-dev';
 import { defaultSearchEngine, userDataPath } from "./utils/userdata";
@@ -6,6 +6,10 @@ import { decrypt, encrypt, shakeKey } from "./utils/password";
 
 let mainWindow: BrowserWindow;
 function createWindow() {
+  protocol.registerFileProtocol('haos', (request, callback) => {
+    const url = request.url.substr(`haos://`.length);
+    callback({ path: path.normalize(`${__dirname}/${url}`) });
+  });
   // Create the browser window.
   mainWindow = new BrowserWindow({
     height: 600,
@@ -75,8 +79,6 @@ rendererReloader(rendererFile, undefined, (error, path) => {
   console.log("It is a renderer's process hook!");
 });
 
-/*
-ipcMain.on('test', (event, args) => {
-
+ipcMain.on('quit', (event, args) => {
+  app.quit();
 });
-*/

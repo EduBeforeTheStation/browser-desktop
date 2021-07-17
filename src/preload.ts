@@ -1,6 +1,12 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
+import { ipcRenderer } from "electron";
 import fs from "fs";
+
+document.addEventListener('fullscreenchange', () => {
+  const title = document.getElementById("title-bar");
+  console.log(document.fullscreenElement);
+});
 
 window.addEventListener("DOMContentLoaded", () => {
   const headLoad = new Promise((resolve, reject) => {
@@ -19,10 +25,10 @@ window.addEventListener("DOMContentLoaded", () => {
     fs.readFile("./public/body.html", (err, data) => {
       if (err) return reject(err);
       const inner = document.body.innerHTML;
-      document.body.innerHTML = "";
       const wrapper = document.createElement("div");
       wrapper.setAttribute('id', 'root');
       wrapper.innerHTML = inner;
+      document.body.innerHTML = "";
       document.body.appendChild(wrapper);
 
       const template = document.createElement("template");
@@ -39,7 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const close_btn = document.querySelector("#close-btn");
     close_btn?.addEventListener("click", () => {
       alert('❌ 앱을 종료하시겠습니까?');
-      console.log("quit!");
+      ipcRenderer.send('quit');
     });
     
 
@@ -51,7 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   Promise
-    .all([headLoad, bodyLoad])
+    .all([headLoad])
     .then(afterLoadProcess)
     .catch(exceptionProcess);
 });

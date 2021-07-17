@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @font-face {
+            font-family: "noto";
+            src: url("./assets/font/notosanskr-r.otf");
+        }
+
+        body {
+            text-align: center;
+            background-image: url('./assets/images/pado_background.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            margin: 0;
+        }
+
+        .panel {
+            margin: 50px auto;
+            background-color: white;
+            box-shadow: 0px 0px 3px 0px gray;
+            border-radius: 10px;
+            width: 60%;
+            display: inline-block;
+            text-align: left;
+            padding-bottom: 50px;
+        }
+
+        .title {
+            color: #54ADFD;
+            font-size: 34px;
+            font-family: 'noto';
+            margin: 40px 0 0 30px;
+
+        }
+
+        .select {
+            font-size: 22px;
+            margin: 50px 0 0 30px;
+            font-family: 'noto';
+        }
+
+        .images {
+            width: 15%;
+            height: 15%;
+            margin: 20px 0 0 50px;
+        }
+
+        .detail {
+            font-size: 22px;
+            margin: 50px 0 30px 30px;
+            font-family: 'noto';
+        }
+
+        .detail_list {
+            display: block;
+        }
+
+        .detail_list_box {
+            margin: 0 0 0 50px;
+            font-size: 22px;
+            font-family: 'noto';
+            border-bottom: 1px solid black;
+            width: 90%;
+            justify-content: space-between;
+        }
+
+        .detail_text {
+            margin: 10px 0px 10px 10px;
+            width: 30%;
+        }
+
+        .detail_a{
+            display:flex;
+            justify-content: space-between;
+        }
+
+        .arrow {
+            margin: 16px 20px 0 0;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel">
+        <div class="title_box">
+            <p class="title">설정</p>
+        </div>
+        <div class="select_box">
+            <p class="select">검색 엔진 설정</p>
+        </div>
+        <div>
+            <a href="./">
+                <img src="./assets/images/duckduckgoselect.svg" class="images active">
+            </a>
+            <a href="./">
+                <img src="./assets/images/googlebtn.svg" class="images">
+            </a>
+        </div>
+        <div class="detail_box">
+            <p class="detail">세부 설정</p>
+        </div>
+        <div class="detail_list">
+            <div class="detail_list_box">
+                <a href="./" class="detail_a">
+                    <p class="detail_text">방문 기록 삭제</p>
+                    <img src="./assets/images/arrow.svg" class="arrow">
+                </a>
+            </div>
+            <div class="detail_list_box">
+                <p class="detail_text">북마크 표시</p>
+            </div>
+            <div class="detail_list_box">
+                <p class="detail_text">http 보안 경고 표시</p>
+            </div>
+            <div class="detail_list_box">
+                <a href="./" class="detail_a">
+                    <p class="detail_text">비밀번호 저장</p>
+                    <img src="./assets/images/arrow.svg" class="arrow">
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

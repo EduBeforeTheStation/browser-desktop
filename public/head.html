@@ -1,5 +1,30 @@
 <style>
+  body {
+    height: 100vh;
+    padding: 40px 0 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  #root {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
   #title-bar {
-    
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    z-index: 1000;
   }
 </style>

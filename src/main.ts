@@ -55,13 +55,19 @@ app.on("window-all-closed", () => {
 import { mainReloader, rendererReloader } from 'electron-hot-reload';
 
 const mainFile = path.join(app.getAppPath(), 'dist', 'main.js');
-const rendererFile = path.join(app.getAppPath(), 'dist', 'renderer.js');
+const rendererFile = path.join(app.getAppPath(), 'dist', 'preload.js');
 
 mainReloader(mainFile, undefined, (error, path) => {
+  if (error) {
+    console.error(error);
+  }
   console.log("It is a main's process hook!");
 });
 
 rendererReloader(rendererFile, undefined, (error, path) => {
+  if (error) {
+    console.error(error);
+  }
   console.log("It is a renderer's process hook!");
 });
 

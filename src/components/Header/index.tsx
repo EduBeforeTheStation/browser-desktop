@@ -10,10 +10,6 @@ const Header: React.FC = () => {
     //alert('quit');
   };
 
-  useEffect(() => {
-    console.log(window.ipcRenderer);
-  }, []);
-
   const Tabs = [
     <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} idx={1} title={'김병주'} isClicked={true} />,
     <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} idx={2} title={'강태영'} isClicked={false} />
@@ -23,16 +19,8 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
-<<<<<<< HEAD
-        <div className="tabs_wrapper">
-          <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} title={'김병주'} isClicked={true} />
-          <Tab favicon={`https://s2.googleusercontent.com/s2/favicons?domain=${url}`} title={'강태영'} isClicked={false} />
-        </div>
-        <div id="min-btn" className="tab_menu_buttons_wrapper">
-=======
         <div className="tabs_wrapper">{Tabs}</div>
         <div className="tab_menu_buttons_wrapper">
->>>>>>> 7794c377360b15b2d3d6992b3cf777aa5c1ae746
           <div className="tab_menu_button" onClick={tabMenuButtonClickHandler}>
             <img src='./images/minimize.svg' alt='icon-x' />
           </div>

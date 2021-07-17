@@ -1,8 +1,7 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 
-import { ipcRenderer, remote } from "electron";
-import electron from "electron";
+import { ipcRenderer } from "electron";
 
 window.addEventListener("DOMContentLoaded", () => {
   console.log("DOM");

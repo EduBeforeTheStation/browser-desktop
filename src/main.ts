@@ -54,7 +54,8 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and require them here.
 
 import { Updater } from "./updater";
-new Updater();
+const updater = new Updater();
+app.on('ready', updater.onReady);
 
 ipcMain.on('quit', (event, args) => {
   app.quit();

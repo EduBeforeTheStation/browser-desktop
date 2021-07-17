@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @font-face {
+            font-family: "noto";
+            src: url("./assets/font/notosanskr-r.otf");
+        }
+
+        body {
+            text-align: center;
+            background-image: url('./assets/images/pado_background.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            margin: 0;
+        }
+
+        .logo {
+            position: fixed;
+            left: 20px;
+            width: 10%;
+            height: 6%;
+        }
+
+        .panel {
+            margin: 50px auto;
+            background-color: white;
+            box-shadow: 0px 0px 3px 0px gray;
+            border-radius: 10px;
+            width: 60%;
+            display: inline-block;
+            text-align: left;
+            padding-bottom: 50px;
+        }
+
+        .title {
+            color: #54ADFD;
+            font-size: 34px;
+            font-family: 'noto';
+            margin: 40px 0 0 30px;
+
+        }
+
+        .select {
+            font-size: 22px;
+            margin: 50px 0 0 30px;
+            font-family: 'noto';
+        }
+
+        .images {
+            width: 15%;
+            height: 15%;
+            margin: 20px 0 0 50px;
+        }
+
+        .info {
+            font-size: 22px;
+            margin: 20px 0 10px 0;
+            font-family: 'noto';
+        }
+
+        .info_list {
+            display: block;
+            margin: 0 0 0 30px;
+        }
+
+        .login_box {
+            margin: 10px 0 0 50px;
+            font-size: 22px;
+            font-family: 'noto';
+            width: 90%;
+            justify-content: space-between;
+        }
+
+        .login_text {
+            margin: 10px 0px 10px 10px;
+        }
+
+        .login_a {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quit {
+            margin: 16px 20px 0 0;
+            width: 20px;
+            height: 20px;
+        }
+
+        .switch-button {
+            margin: 11px;
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 30px;
+        }
+
+        .switch-button input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .onoff-switch {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .onoff-switch:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #fff;
+            -webkit-transition: .5s;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .switch-button input:checked+.onoff-switch {
+            background-color: #54ADFD;
+        }
+
+        .switch-button input:checked+.onoff-switch:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+
+        .info_box {
+            margin: 0 0 0 30px;
+            font-size: 22px;
+            font-family: 'noto';
+            width: 90%;
+            justify-content: space-between;
+            display: flex;
+        }
+
+        .info_text {
+            font-size: 22px;
+            font-family: 'noto';
+            margin: 10px 0px 10px 10px;
+        }
+
+        .info_text2 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 15px 0 0 40px;
+            color: #BEBEBE;
+        }
+
+        .info_text3 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 15px 0 0 40px;
+        }
+
+        .info_text4 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 20px 0 0 40px;
+        }
+
+        .info_a {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./assets/images/logo.svg" class="logo">
+    <div class="panel">
+        <div class="title_box">
+            <p class="title">비밀번호</p>
+        </div>
+        <div class="select_box">
+            <p class="select">로그인 설정</p>
+        </div>
+        <div class="login_box">
+            <div class="login_a">
+                <p class="login_text">자동 로그인</p>
+                <label class="switch-button"> <input type="checkbox" /> <span class="onoff-switch"></span> </label>
+            </div>
+        </div>
+        <div class="info_box">
+            <p class="info">비밀번호 정보</p>
+        </div>
+        <div class="info_list">
+            <div class="info_box">
+                <a href="./" class="info_a">
+                    <img src="./assets/images/quit.svg" class="quit"><!--favicon.ico-->
+                    <p class="info_text">Naver</p>
+                    <p class="info_text2">www.naver.com</p>
+                    <p class="info_text3">kkttyy324</p>
+                    <p class="info_text4">***************</p>
+                </a>
+                <a href="./">
+                    <img src="./assets/images/quit.svg" class="quit">
+                </a>
+            </div>
+            <div class="info_box">
+                <a href="./" class="info_a">
+                    <img src="./assets/images/quit.svg" class="quit"><!--favicon.ico-->
+                    <p class="info_text">Naver</p>
+                    <p class="info_text2">www.naver.com</p>
+                    <p class="info_text3">kkttyy324</p>
+                    <p class="info_text4">***************</p>
+                </a>
+                <a href="./">
+                    <img src="./assets/images/quit.svg" class="quit">
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

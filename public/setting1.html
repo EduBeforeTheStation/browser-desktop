@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @font-face {
+            font-family: "noto";
+            src: url("./assets/font/notosanskr-r.otf");
+        }
+
+        body {
+            text-align: center;
+            background-image: url('./assets/images/pado_background.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            margin: 0;
+        }
+
+        .logo {
+            position: fixed;
+            left: 20px;
+            width: 10%;
+            height: 6%;
+        }
+
+        .panel {
+            margin: 50px auto;
+            background-color: white;
+            box-shadow: 0px 0px 3px 0px gray;
+            border-radius: 10px;
+            width: 60%;
+            display: inline-block;
+            text-align: left;
+            padding-bottom: 50px;
+        }
+
+        .title {
+            color: #54ADFD;
+            font-size: 34px;
+            font-family: 'noto';
+            margin: 40px 0 0 30px;
+        }
+
+        .log {
+            margin: 30px 0px 0px 0;
+
+            display: block;
+        }
+
+        .log_box {
+            margin: 0 auto;
+            font-size: 22px;
+            font-family: 'noto';
+            border-top: 1px solid black;
+            width: 90%;
+            justify-content: space-between;
+            display: flex;
+        }
+
+        .log_text {
+            font-size: 22px;
+            font-family: 'noto';
+            margin: 10px 0px 10px 10px;
+        }
+
+        .log_text2 {
+            font-size: 18px;
+            font-family: 'noto';
+            margin: 15px 0 0 40px;
+            color: #BEBEBE;
+        }
+
+        .log_a {
+            display: flex;
+        }
+
+        .quit {
+            margin: 14.5px 10px 0 0;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./assets/images/logo.svg" class="logo">
+    <div class="panel">
+        <div class="title_box">
+            <p class="title">방문기록</p>
+        </div>
+        <div class="log">
+            <div class="log_box">
+                <a href="./" class="log_a">
+                    <img src="./assets/images/quit.svg" class="quit"> <!--favicon.ico-->
+                    <p class="log_text">Naver</p>
+                    <p class="log_text2">Naver</p>
+                </a>
+                <a href="./">
+                    <img src="./assets/images/quit.svg" class="quit">
+                </a>
+            </div>
+            <div class="log_box">
+                <a href="./" class="log_a">
+                    <img src="./assets/images/quit.svg" class="quit"> <!--favicon.ico-->
+                    <p class="log_text">Naver</p>
+                    <p class="log_text2">www.naver.com</p>
+                </a>
+                <a href="./">
+                    <img src="./assets/images/quit.svg" class="quit">
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

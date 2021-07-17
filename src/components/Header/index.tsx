@@ -69,7 +69,7 @@ const Header: React.FC = () => {
           }}>
             <img src='./assets/images/full.svg' alt='icon-x' />
           </div>
-          <div id="quit_btn" className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
+          <div id="quit-btn" className="tab_menu_button quit_btn" onClick={tabMenuButtonClickHandler}>
             <img src='./assets/images/quit.svg' alt='icon-x' />
           </div>
         </div>

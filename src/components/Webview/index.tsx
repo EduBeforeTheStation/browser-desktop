@@ -13,11 +13,8 @@ const Webview: React.FC<any> = ({ idx }) => {
       current.addEventListener('dom-ready', () => {
         const data: any = tabs[idx];
         console.log(data.history);
-        const url = current.getURL();
         const title = current.getTitle();
-        data.url = url;
         data.title = title;
-        data.history.push(url);
         updateTab(idx, data);
       });
       current.addEventListener('will-navigate', () => {

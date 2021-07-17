@@ -1,5 +1,6 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
+import { app } from 'electron';
 import fs from "fs";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -35,11 +36,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   function afterLoadProcess() {
-    const site_wrapper = document.querySelector('.site-wrapper');
     const close_btn = document.querySelector("#close-btn");
     close_btn?.addEventListener("click", () => {
       alert('❌ 앱을 종료하시겠습니까?');
-      console.log("quit!");
+      app.quit();
     });
     
 

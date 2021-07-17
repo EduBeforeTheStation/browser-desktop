@@ -18,7 +18,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/public/index.html`);
+  mainWindow.loadURL(defaultSearchEngine);
 
   mainWindow.webContents.on('will-navigate', (event, url) => {
     // url이 https인지 검사하고 http일시 경고 전송

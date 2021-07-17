@@ -19,13 +19,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const bodyLoad = new Promise((resolve, reject) => {
     fs.readFile("./public/body.html", (err, data) => {
       if (err) return reject(err);
-      const inner = document.body.innerHTML;
-      document.body.innerHTML = "";
-      const wrapper = document.createElement("div");
-      wrapper.setAttribute('id', 'root');
-      wrapper.innerHTML = inner;
-      document.body.appendChild(wrapper);
-
       const template = document.createElement("template");
       template.innerHTML = data.toString();
       template.content.childNodes.forEach((value, key, parent) => {

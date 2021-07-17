@@ -29,10 +29,10 @@ var Database = /** @class */ (function () {
             return false;
         }
     };
-    Database.prototype.GetHistories = function () {
+    Database.prototype.GetVisitHistories = function () {
         return this._db.get("history").value();
     };
-    Database.prototype.AddHistory = function (history) {
+    Database.prototype.AddVisitHistory = function (history) {
         try {
             this._db.get("history").push(history);
             return true;
@@ -41,10 +41,10 @@ var Database = /** @class */ (function () {
             return false;
         }
     };
-    Database.prototype.GetHistory = function (id) {
+    Database.prototype.GetVisitHistory = function (id) {
         return this._db.get("history").get(id).value();
     };
-    Database.prototype.SetHistory = function (history, id) {
+    Database.prototype.SetVisitHistory = function (history, id) {
         try {
             this._db.get("history").set(id, history);
             return true;

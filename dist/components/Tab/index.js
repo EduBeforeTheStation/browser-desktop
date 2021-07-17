@@ -37,6 +37,8 @@ require("./style.css");
 var Tab = function (_a) {
     var idx = _a.idx, favicon = _a.favicon, title = _a.title, isClicked = _a.isClicked;
     var removeTabs = react_1.useContext(store_1.Context).removeTabs;
-    return (jsx_runtime_1.jsxs("div", __assign({ className: "tab_item " + (isClicked ? 'clicked' : '') }, { children: [jsx_runtime_1.jsx("img", { className: "favicon", src: favicon, alt: 'favicon' }, void 0), jsx_runtime_1.jsxs("p", __assign({ className: 'site_title' }, { children: ["\u00A0", title] }), void 0), isClicked !== null && isClicked !== void 0 ? isClicked : jsx_runtime_1.jsx("p", __assign({ onClick: function () { return removeTabs(idx); } }, { children: "X" }), void 0)] }), void 0));
+    return (jsx_runtime_1.jsxs("div", __assign({ className: "tab_item " + (isClicked ? 'clicked' : '') }, { children: [jsx_runtime_1.jsx("img", { className: "favicon", src: favicon, alt: 'favicon' }, void 0),
+            jsx_runtime_1.jsxs("p", __assign({ className: 'site_title' }, { children: ["\u00A0", title] }), void 0),
+            isClicked !== null && isClicked !== void 0 ? isClicked : jsx_runtime_1.jsx("p", __assign({ onClick: function () { return removeTabs(idx); } }, { children: "X" }), void 0)] }), void 0));
 };
 exports.default = react_1.default.memo(Tab);

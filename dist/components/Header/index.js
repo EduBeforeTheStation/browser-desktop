@@ -22,18 +22,25 @@ var Header = function () {
     var url = 'https://duckduckgo.com';
     var tablineRef = react_1.useRef(null);
     var tabMenuButtonClickHandler = function () {
-        //ipcRenderer.send('quit');
+        //alert('quit');
     };
-    react_1.useEffect(function () {
-        console.log(window.ipcRenderer);
-    }, []);
     var Tabs = [
         jsx_runtime_1.jsx(Tab_1.default, { favicon: "https://s2.googleusercontent.com/s2/favicons?domain=" + url, idx: 1, title: '김병주', isClicked: true }, void 0),
         jsx_runtime_1.jsx(Tab_1.default, { favicon: "https://s2.googleusercontent.com/s2/favicons?domain=" + url, idx: 2, title: '강태영', isClicked: false }, void 0)
     ];
-    return (jsx_runtime_1.jsxs("header", __assign({ className: "header" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "tab_line", ref: tablineRef }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "tabs_wrapper" }, { children: Tabs }), void 0), jsx_runtime_1.jsxs("div", __assign({ className: "tab_menu_buttons_wrapper" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "tab_menu_button", onClick: tabMenuButtonClickHandler }, { children: jsx_runtime_1.jsx("img", { src: './images/minimize.svg', alt: 'icon-x' }, void 0) }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "tab_menu_button", onClick: function () {
+    return (jsx_runtime_1.jsxs("header", __assign({ className: "header" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "tab_line", ref: tablineRef }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "tabs_wrapper" }, { children: Tabs }), void 0),
+                    jsx_runtime_1.jsxs("div", __assign({ className: "tab_menu_buttons_wrapper" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "tab_menu_button", onClick: tabMenuButtonClickHandler }, { children: jsx_runtime_1.jsx("img", { src: './images/minimize.svg', alt: 'icon-x' }, void 0) }), void 0),
+                            jsx_runtime_1.jsx("div", __assign({ id: "full-btn", className: "tab_menu_button", onClick: function () {
                                     (tablineRef === null || tablineRef === void 0 ? void 0 : tablineRef.current).click();
                                     (tablineRef === null || tablineRef === void 0 ? void 0 : tablineRef.current).click();
-                                } }, { children: jsx_runtime_1.jsx("img", { src: './images/full.svg', alt: 'icon-x' }, void 0) }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "tab_menu_button quit_btn", onClick: tabMenuButtonClickHandler }, { children: jsx_runtime_1.jsx("img", { src: './images/quit.svg', alt: 'icon-x' }, void 0) }), void 0)] }), void 0)] }), void 0), jsx_runtime_1.jsxs("div", __assign({ className: "control_bar_wrapper" }, { children: [jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/go-back.svg", alt: 'icon-go-back' }, void 0) }), void 0), jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/go-front.svg", alt: 'icon-go-forward' }, void 0) }), void 0), jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/reload.svg", alt: 'icon-reload' }, void 0) }), void 0), jsx_runtime_1.jsx("input", { type: 'text', className: "search_box" }, void 0), jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/star.svg", alt: 'icon-bookmark' }, void 0) }), void 0), jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/menu.svg", alt: 'icon-menu' }, void 0) }), void 0)] }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "bookmark_bar" }, { children: jsx_runtime_1.jsx("div", { className: "bookmark_item" }, void 0) }), void 0)] }), void 0));
+                                } }, { children: jsx_runtime_1.jsx("img", { src: './images/full.svg', alt: 'icon-x' }, void 0) }), void 0),
+                            jsx_runtime_1.jsx("div", __assign({ id: "quit-btn", className: "tab_menu_button quit_btn", onClick: tabMenuButtonClickHandler }, { children: jsx_runtime_1.jsx("img", { src: './images/quit.svg', alt: 'icon-x' }, void 0) }), void 0)] }), void 0)] }), void 0),
+            jsx_runtime_1.jsxs("div", __assign({ className: "control_bar_wrapper" }, { children: [jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/go-back.svg", alt: 'icon-go-back' }, void 0) }), void 0),
+                    jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/go-front.svg", alt: 'icon-go-forward' }, void 0) }), void 0),
+                    jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/reload.svg", alt: 'icon-reload' }, void 0) }), void 0),
+                    jsx_runtime_1.jsx("input", { type: 'text', className: "search_box" }, void 0),
+                    jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/star.svg", alt: 'icon-bookmark' }, void 0) }), void 0),
+                    jsx_runtime_1.jsx("button", __assign({ className: "control_button" }, { children: jsx_runtime_1.jsx("img", { src: "./images/menu.svg", alt: 'icon-menu' }, void 0) }), void 0)] }), void 0),
+            jsx_runtime_1.jsx("div", __assign({ className: "bookmark_bar" }, { children: jsx_runtime_1.jsx("div", { className: "bookmark_item" }, void 0) }), void 0)] }), void 0));
 };
 exports.default = Header;

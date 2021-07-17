@@ -14,7 +14,9 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       devTools: isDev,
-      webviewTag: true
+      webviewTag: true,
+      nodeIntegration: true,
+      contextIsolation: true
     },
     width: 1280,
     frame: false,

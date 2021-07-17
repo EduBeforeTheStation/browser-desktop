@@ -15,6 +15,7 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 require("./style.css");
 var Tab = function (_a) {
     var favicon = _a.favicon, title = _a.title, isClicked = _a.isClicked;
-    return (jsx_runtime_1.jsxs("div", __assign({ className: "tab_item " + (isClicked ? 'clicked' : '') }, { children: [jsx_runtime_1.jsx("img", { className: "favicon", src: favicon, alt: 'favicon' }, void 0), jsx_runtime_1.jsxs("p", __assign({ className: 'site_title' }, { children: ["\u00A0", title] }), void 0)] }), void 0));
+    return (jsx_runtime_1.jsxs("div", __assign({ className: "tab_item " + (isClicked ? 'clicked' : '') }, { children: [jsx_runtime_1.jsx("img", { className: "favicon", src: favicon, alt: 'favicon' }, void 0),
+            jsx_runtime_1.jsxs("p", __assign({ className: 'site_title' }, { children: ["\u00A0", title] }), void 0)] }), void 0));
 };
 exports.default = Tab;

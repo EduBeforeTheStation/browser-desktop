@@ -7,7 +7,7 @@ import './style.css';
 const Header: React.FC = () => {
   const [inputURL, setInputURL] = useState<string>('');
   const tablineRef = useRef(null);
-  const searchFormRef = useRef(null);
+  const searchRef = useRef(null);
   const tabMenuButtonClickHandler = () => {
     //alert('quit');
   };
@@ -18,19 +18,21 @@ const Header: React.FC = () => {
     setInputURL(e.target.value);
   }, [inputURL]);
 
-  useEffect(() => {
-    (searchFormRef?.current as any)?.addEventListener('submit', () => {
+  const searchFormSubmitHandler = useCallback((e: any) => {
+    e.preventDefault();
       tabs.forEach((tab: any, i: number) => {
         if (tab.isClicked) {
           const new_data = tabs[i];
           new_data.url = inputURL;
           new_data.history.push(inputURL);
-          console.log(new_data);
+          console.log(inputURL);
+          console.log('new_data', new_data);
+          (searchRef?.current as any).blur();
           updateTab(i, new_data);
         }
       });
-    });
-  }, []);
+      setInputURL('');
+  }, [inputURL]);
 
   return (
     <header className="header">
@@ -63,8 +65,8 @@ const Header: React.FC = () => {
         <button className="control_button">
           <img src="./assets/images/reload.svg" alt='icon-reload' />
         </button>
-        <form className="search_form" ref={searchFormRef}>
-          <input type='text' className="search_box" onChange={searchBoxChangeHandler} value={inputURL} />
+        <form className="search_form" onSubmit={searchFormSubmitHandler}>
+          <input type='text' ref={searchRef} className="search_box" onChange={searchBoxChangeHandler} value={inputURL} />
         </form>
         <button className="control_button">
           <img src="./assets/images/star.svg" alt='icon-bookmark' />

@@ -21,14 +21,15 @@ const Webview: React.FC<any> = ({ idx }) => {
         updateTab(idx, data);
       });
       current.addEventListener('will-navigate', () => {
-        if (!confirm("지금 가려는 사이트는 https를 지원하지 않습니다.\n정말 가시겠습니까?\n\n(설정에서 끌 수 있습니다.)"))
+        if (new URL(current.getURL()).protocol != "https:")
+        if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?\n\n(설정에서 끌 수 있습니다.)"))
           current.goBack();
       });
     }
   }, []);
 
   return (
-    <webview className="webview" ref={webviewRef} src={tabs[idx].url} style={{ display: tabs[idx].isClicked ? 'block' : 'none' }}></webview>
+    <webview className="webview" ref={webviewRef} src={tabs[idx].url}></webview>
   );
 };
 

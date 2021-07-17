@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/Header';
+import Layout from '../../components/Layout';
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <Header />
+    <Layout>
       <h1>home</h1>
       <Link to='/web'>덕덕고
       </Link>
-    </div>
+    </Layout>
   );
 };
 

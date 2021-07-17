@@ -21,4 +21,4 @@ const Tab: React.FC<ITabProps> = ({ idx, isClicked }) => {
   );
 };
 
-export default React.memo(Tab);
+export default Tab;

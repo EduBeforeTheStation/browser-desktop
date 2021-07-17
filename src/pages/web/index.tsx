@@ -5,7 +5,6 @@ const Web = () => {
 
   return (
     <div>
-      <Header />
       <webview className="webview" src='https://duckduckgo.com/'></webview>
     </div>
   );

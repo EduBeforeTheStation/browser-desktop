@@ -23,7 +23,7 @@ const Webview: React.FC<any> = ({ idx }) => {
       });
       current.addEventListener('will-navigate', () => {
         if (new URL(current.getURL()).protocol == "http:")
-        if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?\n\n(설정에서 끌 수 있습니다.)"))
+        if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?"))
           current.goBack();
       });
       ws.current.send(JSON.stringify({

@@ -3,7 +3,6 @@ import Tab from '../Tab';
 import { Context } from '../../store';
 import './style.css';
 
-
 const Header: React.FC = () => {
   const [isBookmark, setIsBookmark] = useState<boolean>(false);
   const [inputURL, setInputURL] = useState<string>('');
@@ -22,9 +21,9 @@ const Header: React.FC = () => {
     tabs.forEach((tab: any, i: number) => {
       if (tab.isClicked) {
         const new_data = tabs[i];
-        if (new_data.history.length  !== 1) {
+        if (new_data.history.length !== 1) {
           new_data.url = new_data.history[new_data.history.length - 2];
-          new_data.history.pop(); 
+          new_data.history.pop();
         }
       }
     });
@@ -39,12 +38,15 @@ const Header: React.FC = () => {
     e.preventDefault();
       tabs.forEach((tab: any, i: number) => {
         if (tab.isClicked) {
+          const new_data = tabs[i];
           let url = inputURL;
+          if (new URL(inputURL).protocol == "http:")
+          if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?"))
+            new_data.history.goBack();
           if (inputURL.indexOf('https') === -1 && inputURL.indexOf('http') === -1) {
             url = `https://duckduckgo.com/?q=${inputURL}`;
             setInputURL(url); 
           }
-          const new_data = tabs[i];
           new_data.url = url;
           new_data.history.push(url);
           console.log('new_data', new_data);
@@ -58,7 +60,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
         <div className="tabs_wrapper">
-          {tabs.map(({ url }: { url: string }, i: number) => <Tab idx={i}/>)}
+          {tabs.map(({ url }: { url: string }, i: number) => <Tab idx={i} />)}
         </div>
         <div className="tab_menu_buttons_wrapper">
           <div className="tab_menu_button" onClick={() => addTab()}>

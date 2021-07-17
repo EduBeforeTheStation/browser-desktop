@@ -96,7 +96,8 @@
         <div class="log">
             <div class="log_box">
                 <a href="./" class="log_a">
-                    <img src="./assets/images/quit.svg" class="quit"> <!--favicon.ico-->
+                    <img src="./assets/images/quit.svg" class="quit">
+                    <!--favicon.ico-->
                     <p class="log_text">Naver</p>
                     <p class="log_text2">Naver</p>
                 </a>
@@ -106,7 +107,8 @@
             </div>
             <div class="log_box">
                 <a href="./" class="log_a">
-                    <img src="./assets/images/quit.svg" class="quit"> <!--favicon.ico-->
+                    <img src="./assets/images/quit.svg" class="quit">
+                    <!--favicon.ico-->
                     <p class="log_text">Naver</p>
                     <p class="log_text2">www.naver.com</p>
                 </a>
@@ -116,7 +118,30 @@
             </div>
         </div>
     </div>
-
+    <script>
+        let socket = new WebSocket("ws://localhost:3030");
+        socket.onopen = function (e) {
+            console.log("[ws] open");
+            socket.send(JSON.stringify({
+                channel: "visithistory"
+            }));
+        };
+        socket.onmessage = function (recv) {
+            let { channel, data } = JSON.parse(recv.data);
+            if (channel != "visithistory") return;
+            console.log(data);
+        };
+        socket.onerror = function (error) {
+            console.error(`[ws] ${error.message}`);
+        };
+        send = (select) => {
+            console.log(select);
+            socket.send(JSON.stringify({
+                channel: "visithistory",
+                data: select
+            }));
+        }
+    </script>
 </body>
 
 </html>

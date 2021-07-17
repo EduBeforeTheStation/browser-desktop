@@ -62,7 +62,40 @@
     <a href="./google.html" id="google">
         <img src="./assets/images/googleback.svg" class="image">
     </a>
-    <script src="./renderer/selectengine.js"></script>
+    <script>
+        let socket = new WebSocket("ws://localhost:3030");
+        socket.onopen = function (e) {
+            console.log("[ws] open");
+            socket.send(JSON.stringify({
+                channel: "settings"
+            }));
+        };
+
+        socket.onmessage = function (recv) {
+            let { channel, data } = JSON.parse(recv.data);
+            switch (channel) {
+                case "settings":
+                    onSettings(data);
+                    break;
+            }
+        };
+
+        socket.onerror = function (error) {
+            console.error(`[ws] ${error.message}`);
+        };
+
+        onSettings = (settings) => {
+            if (settings.SearchEngine)
+                window.location.pathname = `/${settings.SearchEngine.name}.html`;
+        }
+        send = (select) => {
+            console.log(select);
+            socket.send(JSON.stringify({
+                channel: "select-engine",
+                data: select
+            }));
+        }
+    </script>
 </body>
 
 </html>

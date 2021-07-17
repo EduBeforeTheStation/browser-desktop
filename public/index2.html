@@ -3,6 +3,11 @@
 
 <head>
     <style>
+        @font-face {
+            font-family: "noto";
+            src: url("./assets/notosanskr-b.otf");
+        }
+
         body {
             background-color: #f1f2f3;
             text-align: center;
@@ -23,16 +28,13 @@
         .text {
             margin: 30px 0 0 0;
             font-size: 22px;
+            font-family: 'noto';
         }
 
         .image {
             margin: 30px 0 0 0;
             width: 13%;
             height: 13%;
-        }
-
-        .duckduckgo {
-            margin: 30px 30px 0 0;
         }
 
         .pado {
@@ -52,10 +54,10 @@
     </div>
     <p class="text">사용할 검색엔진을 선택해주세요.</p>
     <a href="./">
-    <img src="./assets/duckduckgo.svg" class="image duckduckgo">
+        <img src="./assets/duckduckgo_normal.svg" class="image">
     </a>
     <a href="./">
-        <img src="./assets/google.svg" class="image">
+        <img src="./assets/google_normal.svg" class="image">
     </a>
     <img src="./assets/padonormal.svg" class="pado">
 </body>

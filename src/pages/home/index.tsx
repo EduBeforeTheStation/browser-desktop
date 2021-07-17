@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Layout from '../../components/Layout';
 import { Context } from '../../store';
 import Webview from '../../components/Webview';
 import Header from '../../components/Header';

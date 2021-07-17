@@ -108,6 +108,7 @@ class WebSoc extends EventEmitter {
     });
   }
   send(channel: string, data: any) {
+    console.log(channel, data);
     this.ws?.send(JSON.stringify({
       channel: channel,
       data: data
@@ -145,11 +146,11 @@ socket.on('visithistory', () => {
 });
 
 socket.on('visit', (data) => {
-  const { title, location } = data;
+  const { title, url} = data;
   const history: userdata.VisitHistory = {
-    title: title,
-    url: location
-  }
+    title,
+    url,
+  };
   userDataBase.AddVisitHistory(history);
 });
 

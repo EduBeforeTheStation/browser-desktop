@@ -1,4 +1,3 @@
-import { WebContents } from 'electron';
 import React, { useEffect, useRef, useContext } from 'react';
 import { Context } from '../../store';
 import './style.css';
@@ -13,7 +12,9 @@ const Webview: React.FC<any> = ({ idx }) => {
       current.addEventListener('dom-ready', () => {
         const data: any = tabs[idx];
         console.log(data.history);
+        const url = current.getURL();
         const title = current.getTitle();
+        data.url = url;
         data.title = title;
         updateTab(idx, data);
       });
@@ -26,7 +27,7 @@ const Webview: React.FC<any> = ({ idx }) => {
   }, []);
 
   return (
-    <webview id={`webview_${idx}`} className="webview" ref={webviewRef} src={tabs[idx].url} style={{ visibility: tabs[idx].isClicked ? 'visible' : 'hidden' }}></webview>
+    <webview id={`webview_${idx}`} className="webview" ref={webviewRef} src={tabs[idx].url} style={{ display: tabs[idx].isClicked ? 'inline-flex' : 'none' }}></webview>
   );
 };
 

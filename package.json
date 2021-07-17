@@ -1,27 +1,94 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "browser-desktop",
   "version": "1.0.0",
-  "description": "A minimal Electron application written with Typescript",
+  "description": "Safest browser",
   "scripts": {
-    "build": "tsc",
+    "typescript:build": "tsc",
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
-    "start": "npm run build && electron ./dist/main.js"
+    "start": "npm run typescript:build && electron ./dist/main.js",
+    "build": "npm run build:linux && npm run build:win",
+    "build:osx": "electron-builder --mac --publish onTagOrDraft",
+    "build:linux": "electron-builder --linux --ia32 --x64 --publish onTagOrDraft",
+    "build:linux32": "electron-builder --linux --ia32 --publish onTagOrDraft",
+    "build:linux64": "electron-builder --linux --x64 --publish onTagOrDraft",
+    "build:win": "electron-builder --win --ia32 --x64 --publish onTagOrDraft",
+    "build:win32": "electron-builder --win --ia32 --publish onTagOrDraft",
+    "build:win64": "electron-builder build --win --x64 --publish onTagOrDraft"
   },
   "repository": "https://github.com/electron/electron-quick-start-typescript",
   "keywords": [
     "Electron",
     "typescript"
   ],
-  "author": "EduBeforeTheStation",
+  "author": "EduBeforeTheStation <kbydeveloped4485@gmail.com>",
+  "contributors": [
+    {
+      "name": "김형진",
+      "email": "kbydeveloped4485@gmail.com"
+    },
+    {
+      "name": "김병주",
+      "email": "sh596@naver.com"
+    },
+    {
+      "name": "강태영",
+      "email": "crobrine@naver.com"
+    },
+    {
+      "name": "박금혁",
+      "email": "rmagur1203@naver.com"
+    }
+  ],
   "license": "CC0-1.0",
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^16.3.3",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "electron": "^13.1.7",
+    "electron-builder": "^22.11.7",
     "eslint": "^7.30.0",
     "typescript": "^4.3.5"
   },
-  "dependencies": {}
+  "build": {
+    "appId": "com.byeongju.hackathon",
+    "productName": "ByeongjuHackathon",
+    "copyright": "Copyright © 2021 Byeongju",
+    "linux": {
+      "category": "Utility",
+      "target": [
+        "tar.gz",
+        "deb",
+        "rpm"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis-web",
+        "zip"
+      ],
+      "icon": "./resource/installer/icon.png"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "EduBeforeTheStation",
+        "repo": "browser-desktop"
+      }
+    ],
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "nsisWeb": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": true,
+      "differentialPackage": true
+    },
+    "directories": {
+      "buildResources": "./resource/installer/",
+      "output": "./deploy",
+      "app": "./dist/"
+    }
+  }
 }

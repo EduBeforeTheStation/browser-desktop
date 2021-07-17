@@ -1,13 +1,11 @@
 import React, { useRef } from 'react';
 import Tab from '../Tab';
 import './style.css';
-import { ipcRenderer } from 'electron';
 
 const Header: React.FC = () => {
   const url = 'https://duckduckgo.com';
   const tablineRef = useRef(null);
   const tabMenuButtonClickHandler = () => {
-    alert('quit');
     //ipcRenderer.send('quit');
   };
 
@@ -49,10 +47,14 @@ const Header: React.FC = () => {
           <img src="./images/star.svg" alt='icon-bookmark' />
         </button>
         <button className="control_button">
-          <img src="" alt='icon-menu' />
+          <img src="./images/menu.svg" alt='icon-menu' />
         </button>
       </div>
-      <div className="bottom_bar"></div>
+      <div className="bookmark_bar">
+        <div className="bookmark_item">
+          
+        </div>
+      </div>
     </header>
   );
 };

@@ -12,14 +12,3 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-window.addEventListener("DOMContentLoaded", () => {
-  const ddg = document.getElementById('ddg');
-  const google = document.getElementById('google');
-  ddg?.addEventListener('click', () => {
-    ipcRenderer.send('select-engine', "DuckDuckGo");
-  });
-  google?.addEventListener('click', () => {
-    ipcRenderer.send('select-engine', "Google");
-  });
-});

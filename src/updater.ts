@@ -4,7 +4,6 @@ import { autoUpdater as updater } from "electron-updater";
 export class Updater {
     updateWin: BrowserWindow | undefined;
     constructor() {
-        console.log("create!!!!");
         updater.on("checking-for-update", () =>
             this.sendStatusToWindow("Checking for update..."));
         updater.on("update-available", () => {

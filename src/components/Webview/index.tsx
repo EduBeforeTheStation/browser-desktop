@@ -1,5 +1,7 @@
+import { WebContents } from 'electron';
 import React, { useEffect, useRef, useContext } from 'react';
 import { Context } from '../../store';
+import './style.css';
 
 const Webview: React.FC<any> = ({ idx }) => {
   const { tabs, updateTab }: any = useContext(Context);
@@ -17,6 +19,10 @@ const Webview: React.FC<any> = ({ idx }) => {
         data.title = title;
         data.history.push(url);
         updateTab(idx, data);
+      });
+      current.addEventListener('will-navigate', () => {
+        if (!confirm("지금 가려는 사이트는 https를 지원하지 않습니다.\n정말 가시겠습니까?\n\n(설정에서 끌 수 있습니다.)"))
+          current.goBack();
       });
     }
   }, []);

@@ -5,7 +5,6 @@ import { defaultSearchEngine, userDataPath } from "./utils/userdata";
 
 let mainWindow: BrowserWindow;
 function createWindow() {
-  console.log(userDataPath);
   // Create the browser window.
   mainWindow = new BrowserWindow({
     height: 600,

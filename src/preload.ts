@@ -5,16 +5,9 @@ import { ipcRenderer, IpcRenderer } from "electron";
 
 window.addEventListener("DOMContentLoaded", () => {
   console.log("DOM");
-<<<<<<< HEAD
-  const menu_btns = document.getElementsByClassName('quit_btn');
-  for (const btn of Array.from(menu_btns)){
-    btn.addEventListener('click', () => {
-      alert('really quit?');
-=======
-  const quit_btn = document.getElementById('quit-btn');
+  const quit_btn = document.getElementById('quit_btn');
   quit_btn?.addEventListener('click', () => {
     if (confirm('really quit?')) {
->>>>>>> db95e6469e75bc9545f4545a6037316de13c953e
       ipcRenderer.send('quit');
     }
   });

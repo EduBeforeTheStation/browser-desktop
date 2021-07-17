@@ -1,12 +1,9 @@
-import { WebContents } from 'electron';
 import React, { useEffect, useRef, useContext } from 'react';
 import { Context } from '../../store';
-import { WebSocketContext } from '../../store/ws';
 import './style.css';
 
 const Webview: React.FC<any> = ({ idx }) => {
   const { tabs, updateTab }: any = useContext(Context);
-  const ws = useContext(WebSocketContext);
   const webviewRef = useRef(null);
 
   useEffect(() => {
@@ -26,13 +23,6 @@ const Webview: React.FC<any> = ({ idx }) => {
         if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?"))
           current.goBack();
       });
-      ws.current.send(JSON.stringify({
-        channel: 'visit',
-        data: {
-          title: current.getTitle(),
-          url: current.getURL(),
-        },
-      }));
     }
   }, []);
 

@@ -6,7 +6,7 @@ export const init = { image1: { useable: false }, image2: { useable: false }, };
 
 const Container: React.FC<{ children: React.ReactNode }> = (props) => {
   const defaultTab = {
-    url: '/',
+    url: 'https://duckduckgo.com',
     history: ['/'],
   };
 

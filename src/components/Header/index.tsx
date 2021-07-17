@@ -5,6 +5,7 @@ import './style.css';
 
 
 const Header: React.FC = () => {
+  const [isBookmark, setIsBookmark] = useState<boolean>(false);
   const [inputURL, setInputURL] = useState<string>('');
   const tablineRef = useRef(null);
   const searchRef = useRef(null);
@@ -13,7 +14,10 @@ const Header: React.FC = () => {
   };
   const { tabs, addTab, updateTab }: any = useContext(Context);
 
+  const clickBookmarkButtonHandler = () => setIsBookmark(!isBookmark); // fake
+
   const clickGoBackButtonHandler = () => {
+    console.log('fdafd');
     tabs.forEach((tab: any, i: number) => {
       if (tab.isClicked) {
         const new_data = tabs[i];
@@ -34,16 +38,19 @@ const Header: React.FC = () => {
     e.preventDefault();
       tabs.forEach((tab: any, i: number) => {
         if (tab.isClicked) {
+          let url = inputURL;
+          if (inputURL.indexOf('https') === -1 && inputURL.indexOf('http') === -1) {
+            url = `https://duckduckgo.com/?q=${inputURL}`;
+            setInputURL(url); 
+          }
           const new_data = tabs[i];
-          new_data.url = inputURL;
-          new_data.history.push(inputURL);
-          console.log(inputURL);
+          new_data.url = url;
+          new_data.history.push(url);
           console.log('new_data', new_data);
           (searchRef?.current as any).blur();
           updateTab(i, new_data);
         }
       });
-      setInputURL('');
   }, [inputURL]);
 
   return (
@@ -80,17 +87,14 @@ const Header: React.FC = () => {
         <form className="search_form" onSubmit={searchFormSubmitHandler}>
           <input type='text' ref={searchRef} className="search_box" onChange={searchBoxChangeHandler} value={inputURL} />
         </form>
-        <button className="control_button">
-          <img src="./assets/images/star.svg" alt='icon-bookmark' />
+        <button className="control_button" onClick={clickBookmarkButtonHandler}>
+          <img src={`./assets/images/${isBookmark ? 'starselect' : 'star'}.svg`} alt='icon-bookmark' />
         </button>
-        <button className="control_button">
+        <button className="control_button" onClick={() => {
+          addTab();
+        }}>
           <img src="./assets/images/menu.svg" alt='icon-menu' />
         </button>
-      </div>
-      <div className="bookmark_bar">
-        <div className="bookmark_item">
-          
-        </div>
       </div>
     </header>
   );

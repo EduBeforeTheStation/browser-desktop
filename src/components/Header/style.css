@@ -1,5 +1,5 @@
 .header {
-  height: 130px;
+  height: 105px;
   width: 100%;
   z-index: 1000;
   position: fixed;
@@ -7,10 +7,6 @@
   left: 0;
   background-color: #fff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
-}
-
-.add_tab_button {
-  z-index: 1000;
 }
 
 .tab_line {
@@ -51,7 +47,7 @@
 }
 
 .control_bar_wrapper {
-  height: 100px;
+  height: 65px;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -86,10 +82,5 @@
 
 .control_bar_wrapper .search_box:focus {
   outline: none;
-}
-
-.bottom_bar {
-  width: 100%;
-  background-color: #fff;
 }
 

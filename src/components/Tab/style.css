@@ -23,4 +23,10 @@
 
 .tab_item .site_title {
   font-size: 12px;
+  margin: 0px 0px 0.25rem;
+  line-height: 1.5;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

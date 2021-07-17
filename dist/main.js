@@ -28,14 +28,14 @@ function createWindow() {
         var url = request.url.substr("haos://".length);
         callback({ path: path.normalize(__dirname + "/" + url) });
     });
-    console.log(__dirname);
     // Create the browser window.
     mainWindow = new electron_1.BrowserWindow({
         height: 800,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             devTools: isDev,
-            webviewTag: true
+            webviewTag: true,
+            contextIsolation: true
         },
         width: 1280,
         frame: false,

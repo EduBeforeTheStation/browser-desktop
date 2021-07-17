@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
         <div className="tabs_wrapper">
-          {tabs.map(({ url }: { url: string }, i: number) => <Tab idx={i} isClicked={true} />)}
+          {tabs.map(({ url, isClicked }: { url: string, isClicked: boolean }, i: number) => <Tab idx={i} isClicked={isClicked} />)}
         </div>
         <div className="tab_menu_buttons_wrapper">
           <div className="tab_menu_button" onClick={() => addTab()}>

@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
 import * as isDev from 'electron-is-dev';
 import { defaultSearchEngine, userDataPath } from "./utils/userdata";
+import { decrypt, encrypt, shakeKey } from "./utils/password";
 
 let mainWindow: BrowserWindow;
 function createWindow() {
@@ -51,6 +52,9 @@ app.on("window-all-closed", () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+import { Updater } from "./updater";
+new Updater();
 
 import { mainReloader, rendererReloader } from 'electron-hot-reload';
 

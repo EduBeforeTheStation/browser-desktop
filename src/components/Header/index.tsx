@@ -3,7 +3,6 @@ import Tab from '../Tab';
 import { Context } from '../../store';
 import './style.css';
 
-
 const Header: React.FC = () => {
   const [inputURL, setInputURL] = useState<string>('');
   const tablineRef = useRef(null);
@@ -17,9 +16,9 @@ const Header: React.FC = () => {
     tabs.forEach((tab: any, i: number) => {
       if (tab.isClicked) {
         const new_data = tabs[i];
-        if (new_data.history.length  !== 1) {
+        if (new_data.history.length !== 1) {
           new_data.url = new_data.history[new_data.history.length - 2];
-          new_data.history.pop(); 
+          new_data.history.pop();
         }
       }
     });
@@ -32,25 +31,28 @@ const Header: React.FC = () => {
 
   const searchFormSubmitHandler = useCallback((e: any) => {
     e.preventDefault();
-      tabs.forEach((tab: any, i: number) => {
-        if (tab.isClicked) {
-          const new_data = tabs[i];
-          new_data.url = inputURL;
-          new_data.history.push(inputURL);
-          console.log(inputURL);
-          console.log('new_data', new_data);
-          (searchRef?.current as any).blur();
-          updateTab(i, new_data);
-        }
-      });
-      setInputURL('');
+    tabs.forEach((tab: any, i: number) => {
+      if (tab.isClicked) {
+        const new_data = tabs[i];
+        if (new URL(inputURL).protocol == "http:")
+          if (!confirm("지금 가려는 사이트는 https가 아닙니다.\n정말 가시겠습니까?"))
+            new_data.history.goBack();
+        new_data.url = inputURL;
+        new_data.history.push(inputURL);
+        console.log(inputURL);
+        console.log('new_data', new_data);
+        (searchRef?.current as any).blur();
+        updateTab(i, new_data);
+      }
+    });
+    setInputURL('');
   }, [inputURL]);
 
   return (
     <header className="header">
       <div className="tab_line" ref={tablineRef}>
         <div className="tabs_wrapper">
-          {tabs.map(({ url }: { url: string }, i: number) => <Tab idx={i}/>)}
+          {tabs.map(({ url }: { url: string }, i: number) => <Tab idx={i} />)}
         </div>
         <div className="tab_menu_buttons_wrapper">
           <div className="tab_menu_button" onClick={() => addTab()}>
@@ -89,7 +91,7 @@ const Header: React.FC = () => {
       </div>
       <div className="bookmark_bar">
         <div className="bookmark_item">
-          
+
         </div>
       </div>
     </header>

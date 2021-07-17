@@ -105,9 +105,13 @@ socket.on('select-engine', (select: "DuckDuckGo" | "Google") => {
 });
 
 socket.on('settings', () => {
-  console.log("on setting")
   const settings: userdata.Settings = userDataBase.GetSettings();
   socket.send('settings', settings);
+});
+
+socket.on('visithistory', () => {
+  const histories: Array<userdata.VisitHistory> = userDataBase.GetVisitHistories();
+  socket.send('visithistory', histories);
 });
 
 /*

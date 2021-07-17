@@ -47,11 +47,7 @@
 }
 
 .control_bar_wrapper {
-<<<<<<< HEAD
   height: 50px;
-=======
-  height: 65px;
->>>>>>> ed31321d4edfd35673db0a424abcb5f6b65e7582
   display: flex;
   align-items: center;
   padding: 0 10px;

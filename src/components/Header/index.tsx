@@ -45,8 +45,8 @@ const Header: React.FC = () => {
     e.preventDefault();
       tabs.forEach((tab: any, i: number) => {
         if (tab.isClicked) {
-          const new_data = tabs[i];
           let url = inputURL;
+          const new_data = tabs[i];
           onUrlChanging(new_data, url);
           if (inputURL.indexOf('https') === -1 && inputURL.indexOf('http') === -1) {
             url = `https://duckduckgo.com/?q=${inputURL}`;

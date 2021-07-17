@@ -1,0 +1,38 @@
+.control_bar_wrapper {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.control_bar_wrapper .control_button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+}
+
+.control_bar_wrapper .control_button img {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.control_bar_wrapper .search_box {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 7px;
+  background: #f1f2f3;
+  padding: 0 0 0 10px;
+  margin: 0 12px;
+}
+
+.control_bar_wrapper .search_box:focus {
+  outline: none;
+}
+
+.bottom_bar {
+  width: 100%;
+  background-color: #fff;
+  height: 27px;
+}
